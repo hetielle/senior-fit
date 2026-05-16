@@ -1,103 +1,91 @@
-import { headers } from "next/headers";
-import Link from "next/link";
 import { redirect } from "next/navigation";
-
-import { LatestPost } from "pnpm/app/_components/post";
+import Image from "next/image";
 import { auth } from "pnpm/server/better-auth";
 import { getSession } from "pnpm/server/better-auth/server";
-import { api, HydrateClient } from "pnpm/trpc/server";
+import logo from "./imgs/logo.png";
+import { HydrateClient } from "pnpm/trpc/server";
+import "./page.css";
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
   const session = await getSession();
 
   if (session) {
-    void api.post.getLatest.prefetch();
+    redirect("/dashboard");
   }
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
+      <div className="page-wrapper">
+        <Image src={logo} alt="Logo" style={{ width: "30vw" }} />
+        <main className="login-card">
+          <h1 className="login-title">Entrar</h1>
+          <p className="login-subtitle">
+            Bem-vindo de volta! Acesse sua conta para continuar.
+          </p>
 
-            <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-center text-2xl text-white">
-                {session && <span>Logged in as {session.user?.name}</span>}
-              </p>
-              {!session ? (
-                <form>
-                  <button
-                    className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-                    formAction={async () => {
-                      "use server";
-                      const res = await auth.api.signInSocial({
-                        body: {
-                          provider: "github",
-                          callbackURL: "/",
-                        },
-                      });
-                      if (!res.url) {
-                        throw new Error("No URL returned from signInSocial");
-                      }
-                      redirect(res.url);
-                    }}
-                  >
-                    Sign in with Github
-                  </button>
-                </form>
-              ) : (
-                <form>
-                  <button
-                    className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-                    formAction={async () => {
-                      "use server";
-                      await auth.api.signOut({
-                        headers: await headers(),
-                      });
-                      redirect("/");
-                    }}
-                  >
-                    Sign out
-                  </button>
-                </form>
-              )}
+          <form className="form">
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                E-mail
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="voce@exemplo.com"
+                className="form-input"
+              />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Senha
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                className="form-input"
+              />
+            </div>
+
+            <button type="submit" className="btn-primary">
+              Entrar
+            </button>
+          </form>
+
+          <div className="divider">
+            <div className="divider-line" />
+            <span className="divider-text">ou</span>
+            <div className="divider-line" />
           </div>
 
-          {session?.user && <LatestPost />}
-        </div>
-      </main>
+          <form>
+            <button
+              type="submit"
+              className="btn-social"
+              formAction={async () => {
+                "use server";
+                const res = await auth.api.signInSocial({
+                  body: {
+                    provider: "github",
+                    callbackURL: "/dashboard",
+                  },
+                });
+                if (!res.url) {
+                  throw new Error("No URL returned from signInSocial");
+                }
+                redirect(res.url);
+              }}
+            >
+              Entrar com GitHub
+            </button>
+          </form>
+
+          <p className="signup-prompt">
+            Não tem uma conta? <a href="/sign-up">Cadastre-se</a>
+          </p>
+        </main>
+      </div>
     </HydrateClient>
   );
 }
