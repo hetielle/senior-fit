@@ -129,12 +129,85 @@ exports.Prisma.PostScalarFieldEnum = {
   createdById: 'createdById'
 };
 
+exports.Prisma.ExerciseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  muscleGroup: 'muscleGroup',
+  sets: 'sets',
+  reps: 'reps',
+  durationSecs: 'durationSecs'
+};
+
+exports.Prisma.WorkoutScalarFieldEnum = {
+  id: 'id',
+  dayType: 'dayType',
+  title: 'title'
+};
+
+exports.Prisma.WorkoutItemScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  sets: 'sets',
+  reps: 'reps',
+  durationSecs: 'durationSecs',
+  workoutId: 'workoutId',
+  exerciseId: 'exerciseId'
+};
+
+exports.Prisma.UserProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  age: 'age',
+  phone: 'phone',
+  objective: 'objective',
+  height: 'height',
+  weight: 'weight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WeightEntryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  weight: 'weight',
+  date: 'date'
+};
+
+exports.Prisma.StudentWorkoutScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  instructorId: 'instructorId',
+  dayOfWeek: 'dayOfWeek',
+  title: 'title',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudentWorkoutItemScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  sets: 'sets',
+  reps: 'reps',
+  durationSecs: 'durationSecs',
+  studentWorkoutId: 'studentWorkoutId',
+  exerciseId: 'exerciseId'
+};
+
+exports.Prisma.ExerciseCompletionScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  studentWorkoutItemId: 'studentWorkoutItemId',
+  date: 'date'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
   image: 'image',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -193,6 +266,14 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Post: 'Post',
+  Exercise: 'Exercise',
+  Workout: 'Workout',
+  WorkoutItem: 'WorkoutItem',
+  UserProfile: 'UserProfile',
+  WeightEntry: 'WeightEntry',
+  StudentWorkout: 'StudentWorkout',
+  StudentWorkoutItem: 'StudentWorkoutItem',
+  ExerciseCompletion: 'ExerciseCompletion',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

@@ -29,7 +29,6 @@ export function SignUpForm() {
       name,
       email,
       password,
-      // @ts-expect-error -- role is an additional field configured in better-auth
       role,
     });
 
@@ -107,7 +106,9 @@ export function SignUpForm() {
       <div className="form-group">
         <label className="form-label">Tipo de conta</label>
         <div className="role-options">
-          <label className={`role-option ${role === "STUDENT" ? "role-option-active" : ""}`}>
+          <label
+            className={`role-option ${role === "STUDENT" ? "role-option-active" : ""}`}
+          >
             <input
               type="radio"
               name="role"
@@ -118,7 +119,9 @@ export function SignUpForm() {
             <span className="role-option-label">Sou Aluno</span>
             <span className="role-option-desc">Acesso aos meus treinos</span>
           </label>
-          <label className={`role-option ${role === "INSTRUCTOR" ? "role-option-active" : ""}`}>
+          <label
+            className={`role-option ${role === "INSTRUCTOR" ? "role-option-active" : ""}`}
+          >
             <input
               type="radio"
               name="role"

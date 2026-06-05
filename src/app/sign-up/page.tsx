@@ -6,6 +6,7 @@ import logo from "../imgs/logo.png";
 import { HydrateClient } from "pnpm/trpc/server";
 import { SignUpForm } from "../_components/SignUpForm";
 import "../page.css";
+import Link from "next/link";
 
 export default async function SignUp() {
   const session = await getSession();
@@ -55,7 +56,7 @@ export default async function SignUp() {
           </form>
 
           <p className="signup-prompt">
-            Já tem uma conta? <a href="/">Entrar</a>
+            Já tem uma conta? <Link href="/">Entrar</Link>
           </p>
         </main>
       </div>
