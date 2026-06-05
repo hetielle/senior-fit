@@ -2,11 +2,11 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import { auth } from "pnpm/server/better-auth";
 import { getSession } from "pnpm/server/better-auth/server";
-import logo from "./imgs/logo.png";
+import logo from "../imgs/logo.png";
 import { HydrateClient } from "pnpm/trpc/server";
-import "./page.css";
+import "../page.css";
 
-export default async function Home() {
+export default async function SignUp() {
   const session = await getSession();
 
   if (session) {
@@ -18,12 +18,24 @@ export default async function Home() {
       <div className="page-wrapper">
         <Image src={logo} alt="Logo" style={{ width: "30vw" }} />
         <main className="login-card">
-          <h1 className="login-title">Entrar</h1>
+          <h1 className="login-title">Cadastrar</h1>
           <p className="login-subtitle">
-            Bem-vindo de volta! Acesse sua conta para continuar.
+            Crie sua conta para começar a usar o SeniorFit.
           </p>
 
           <form className="form">
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                Nome
+              </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Seu nome completo"
+                className="form-input"
+              />
+            </div>
+
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 E-mail
@@ -48,8 +60,20 @@ export default async function Home() {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="confirm-password" className="form-label">
+                Confirmar senha
+              </label>
+              <input
+                id="confirm-password"
+                type="password"
+                placeholder="••••••••"
+                className="form-input"
+              />
+            </div>
+
             <button type="submit" className="btn-primary">
-              Entrar
+              Cadastrar
             </button>
           </form>
 
@@ -77,12 +101,12 @@ export default async function Home() {
                 redirect(res.url);
               }}
             >
-              Entrar com GitHub
+              Cadastrar com GitHub
             </button>
           </form>
 
           <p className="signup-prompt">
-            Não tem uma conta? <a href="/sign-up">Cadastre-se</a>
+            Já tem uma conta? <a href="/">Entrar</a>
           </p>
         </main>
       </div>
