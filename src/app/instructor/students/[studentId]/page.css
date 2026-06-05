@@ -1,0 +1,219 @@
+@reference "../../../globals.css";
+
+.student-detail-wrapper {
+  @apply min-h-screen bg-zinc-50 dark:bg-black;
+}
+
+.student-detail-header {
+  @apply flex items-center justify-between border-b border-zinc-200 bg-white px-8 py-4 dark:border-zinc-800 dark:bg-zinc-950;
+}
+
+.student-detail-logo {
+  width: 120px;
+  height: auto;
+}
+
+.header-nav {
+  @apply flex gap-1;
+}
+
+.nav-link {
+  @apply rounded-lg px-4 py-2 text-sm font-medium text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50;
+}
+
+.student-detail-main {
+  @apply mx-auto max-w-2xl px-6 py-10;
+}
+
+/* Student info card */
+
+.student-info-card {
+  @apply mb-6 rounded-2xl border border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-900;
+}
+
+.student-detail-name {
+  @apply text-2xl font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.student-detail-email {
+  @apply mb-4 text-sm text-zinc-500 dark:text-zinc-400;
+}
+
+.student-profile-grid {
+  @apply grid grid-cols-2 gap-3;
+}
+
+.profile-field {
+  @apply flex flex-col gap-0.5;
+}
+
+.profile-field-label {
+  @apply text-xs font-medium text-zinc-400 dark:text-zinc-500;
+}
+
+.profile-field-value {
+  @apply text-sm font-medium text-zinc-900 dark:text-zinc-50;
+}
+
+/* Weight history */
+
+.weight-history {
+  @apply mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800;
+}
+
+.weight-history-title {
+  @apply mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300;
+}
+
+.weight-history-list {
+  @apply flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+}
+
+.weight-history-item {
+  @apply flex items-center justify-between py-2;
+}
+
+.weight-history-date {
+  @apply text-sm text-zinc-500 dark:text-zinc-400;
+}
+
+.weight-history-right {
+  @apply flex items-center gap-3;
+}
+
+.weight-diff {
+  @apply text-xs font-medium;
+}
+
+.weight-diff-up {
+  @apply text-red-500;
+}
+
+.weight-diff-down {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.weight-history-value {
+  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+/* Workout plan editor section */
+
+.plan-section {
+  @apply rounded-2xl border border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-900;
+}
+
+.plan-section-title {
+  @apply mb-4 text-base font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+/* WorkoutPlanEditor styles */
+
+.plan-editor {
+  @apply flex flex-col gap-4;
+}
+
+.day-tabs {
+  @apply flex gap-1.5;
+}
+
+.day-tab {
+  @apply flex-1 rounded-lg px-2 py-2 text-sm font-medium text-zinc-500 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800;
+}
+
+.day-tab-active {
+  @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50;
+}
+
+.day-tab-has-workout {
+  @apply font-semibold text-zinc-700 dark:text-zinc-200;
+}
+
+.day-panel {
+  @apply min-h-40 rounded-xl border border-zinc-100 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950;
+}
+
+.day-panel-header {
+  @apply mb-3 flex items-center justify-between;
+}
+
+.day-panel-title {
+  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.btn-delete-day {
+  @apply rounded-lg px-3 py-1 text-xs font-medium text-red-500 transition hover:bg-red-50 dark:hover:bg-red-950;
+}
+
+.editor-exercise-list {
+  @apply mb-3 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+}
+
+.editor-exercise-item {
+  @apply flex items-center justify-between py-2;
+}
+
+.editor-exercise-info {
+  @apply flex flex-col;
+}
+
+.editor-exercise-name {
+  @apply text-sm font-medium text-zinc-900 dark:text-zinc-50;
+}
+
+.editor-exercise-muscle {
+  @apply text-xs text-zinc-400 dark:text-zinc-500;
+}
+
+.editor-exercise-right {
+  @apply flex items-center gap-3;
+}
+
+.editor-exercise-volume {
+  @apply text-sm font-semibold text-zinc-700 dark:text-zinc-300;
+}
+
+.btn-remove-item {
+  @apply flex h-6 w-6 items-center justify-center rounded-full text-zinc-400 transition hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950;
+}
+
+.editor-empty {
+  @apply py-4 text-sm text-zinc-400 dark:text-zinc-500;
+}
+
+.add-exercise-row {
+  @apply mt-3 flex flex-wrap items-center gap-2 border-t border-zinc-100 pt-3 dark:border-zinc-800;
+}
+
+.editor-select {
+  @apply h-9 flex-1 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900 outline-none focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50;
+  min-width: 160px;
+}
+
+.editor-input-sm {
+  @apply h-9 w-20 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900 outline-none focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50;
+}
+
+.editor-input {
+  @apply h-9 flex-1 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900 outline-none focus:border-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50;
+}
+
+.btn-add-exercise {
+  @apply h-9 rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300;
+}
+
+.no-workout-panel {
+  @apply flex flex-col gap-3;
+}
+
+.no-workout-text {
+  @apply text-sm text-zinc-400 dark:text-zinc-500;
+}
+
+.create-workout-row {
+  @apply flex gap-2;
+}
+
+.btn-create-workout {
+  @apply h-9 shrink-0 rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300;
+}

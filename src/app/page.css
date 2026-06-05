@@ -61,3 +61,31 @@
     @apply font-medium text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50;
   }
 }
+
+.form-error {
+  @apply rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950 dark:text-red-400;
+}
+
+.role-options {
+  @apply flex gap-3;
+}
+
+.role-option {
+  @apply flex flex-1 cursor-pointer flex-col gap-0.5 rounded-lg border border-zinc-200 px-4 py-3 transition hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500;
+
+  input[type="radio"] {
+    @apply sr-only;
+  }
+}
+
+.role-option-active {
+  @apply border-zinc-900 dark:border-zinc-300;
+}
+
+.role-option-label {
+  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.role-option-desc {
+  @apply text-xs text-zinc-500 dark:text-zinc-400;
+}

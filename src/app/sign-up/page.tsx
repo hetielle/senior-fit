@@ -4,6 +4,7 @@ import { auth } from "pnpm/server/better-auth";
 import { getSession } from "pnpm/server/better-auth/server";
 import logo from "../imgs/logo.png";
 import { HydrateClient } from "pnpm/trpc/server";
+import { SignUpForm } from "../_components/SignUpForm";
 import "../page.css";
 
 export default async function SignUp() {
@@ -23,59 +24,7 @@ export default async function SignUp() {
             Crie sua conta para começar a usar o SeniorFit.
           </p>
 
-          <form className="form">
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">
-                Nome
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="Seu nome completo"
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                E-mail
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="voce@exemplo.com"
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">
-                Senha
-              </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="confirm-password" className="form-label">
-                Confirmar senha
-              </label>
-              <input
-                id="confirm-password"
-                type="password"
-                placeholder="••••••••"
-                className="form-input"
-              />
-            </div>
-
-            <button type="submit" className="btn-primary">
-              Cadastrar
-            </button>
-          </form>
+          <SignUpForm />
 
           <div className="divider">
             <div className="divider-line" />

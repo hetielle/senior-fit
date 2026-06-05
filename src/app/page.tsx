@@ -4,6 +4,7 @@ import { auth } from "pnpm/server/better-auth";
 import { getSession } from "pnpm/server/better-auth/server";
 import logo from "./imgs/logo.png";
 import { HydrateClient } from "pnpm/trpc/server";
+import { LoginForm } from "./_components/LoginForm";
 import "./page.css";
 
 export default async function Home() {
@@ -23,35 +24,7 @@ export default async function Home() {
             Bem-vindo de volta! Acesse sua conta para continuar.
           </p>
 
-          <form className="form">
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">
-                E-mail
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="voce@exemplo.com"
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">
-                Senha
-              </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                className="form-input"
-              />
-            </div>
-
-            <button type="submit" className="btn-primary">
-              Entrar
-            </button>
-          </form>
+          <LoginForm />
 
           <div className="divider">
             <div className="divider-line" />

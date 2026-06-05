@@ -28,7 +28,7 @@ model Post {
 }
 
 model Exercise {
-  id           String        @id @default(cuid())
+  id           String               @id @default(cuid())
   name         String
   description  String?
   muscleGroup  String
@@ -36,6 +36,7 @@ model Exercise {
   reps         Int?
   durationSecs Int?
   items        WorkoutItem[]
+  studentItems StudentWorkoutItem[]
 }
 
 model Workout {
@@ -80,19 +81,66 @@ model WeightEntry {
   @@index([userId])
 }
 
+model StudentWorkout {
+  id           String               @id @default(cuid())
+  studentId    String
+  student      User                 @relation("StudentWorkouts", fields: [studentId], references: [id], onDelete: Cascade)
+  instructorId String
+  instructor   User                 @relation("InstructorAssignments", fields: [instructorId], references: [id])
+  dayOfWeek    Int
+  title        String
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  items        StudentWorkoutItem[]
+
+  @@unique([studentId, dayOfWeek])
+  @@index([studentId])
+}
+
+model StudentWorkoutItem {
+  id               String               @id @default(cuid())
+  order            Int
+  sets             Int?
+  reps             Int?
+  durationSecs     Int?
+  studentWorkoutId String
+  studentWorkout   StudentWorkout       @relation(fields: [studentWorkoutId], references: [id], onDelete: Cascade)
+  exerciseId       String
+  exercise         Exercise             @relation(fields: [exerciseId], references: [id])
+  completions      ExerciseCompletion[]
+
+  @@index([studentWorkoutId])
+}
+
+model ExerciseCompletion {
+  id                   String             @id @default(cuid())
+  studentId            String
+  student              User               @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentWorkoutItemId String
+  studentWorkoutItem   StudentWorkoutItem @relation(fields: [studentWorkoutItemId], references: [id], onDelete: Cascade)
+  date                 DateTime           @db.Date
+
+  @@unique([studentId, studentWorkoutItemId, date])
+  @@index([studentId, date])
+}
+
 model User {
-  id            String       @id
+  id            String               @id
   name          String //@db.Text
   email         String
-  emailVerified Boolean      @default(false)
+  emailVerified Boolean              @default(false)
   image         String? //@db.Text
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @default(now()) @updatedAt
+  role          String               @default("STUDENT")
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
   posts         Post[]
   profile       UserProfile?
   weightEntries WeightEntry[]
+  studentWorkouts     StudentWorkout[]    @relation("StudentWorkouts")
+  assignedWorkouts    StudentWorkout[]    @relation("InstructorAssignments")
+  exerciseCompletions ExerciseCompletion[]
 
   @@unique([email])
   @@map("user")

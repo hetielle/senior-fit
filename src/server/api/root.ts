@@ -1,5 +1,7 @@
+import { instructorRouter } from "pnpm/server/api/routers/instructor";
 import { postRouter } from "pnpm/server/api/routers/post";
 import { profileRouter } from "pnpm/server/api/routers/profile";
+import { studentWorkoutRouter } from "pnpm/server/api/routers/studentWorkout";
 import { workoutRouter } from "pnpm/server/api/routers/workout";
 import { createCallerFactory, createTRPCRouter } from "pnpm/server/api/trpc";
 
@@ -12,6 +14,8 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   workout: workoutRouter,
   profile: profileRouter,
+  studentWorkout: studentWorkoutRouter,
+  instructor: instructorRouter,
 });
 
 // export type definition of API

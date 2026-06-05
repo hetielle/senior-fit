@@ -132,3 +132,26 @@ export const protectedProcedure = t.procedure
       },
     });
   });
+
+/**
+ * Instructor-only procedure
+ *
+ * Extends protectedProcedure with a role check.
+ * Throws FORBIDDEN if the authenticated user is not an INSTRUCTOR.
+ */
+export const instructorProcedure = t.procedure
+  .use(timingMiddleware)
+  .use(({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    const user = ctx.session.user as typeof ctx.session.user & { role: string };
+    if (user.role !== "INSTRUCTOR") {
+      throw new TRPCError({ code: "FORBIDDEN" });
+    }
+    return next({
+      ctx: {
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  });

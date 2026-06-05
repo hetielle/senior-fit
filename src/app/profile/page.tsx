@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { getSession } from "pnpm/server/better-auth/server";
 import { db } from "pnpm/server/db";
+import { requireStudent } from "pnpm/server/better-auth/guards";
 import logo from "../imgs/logo.png";
 import "./page.css";
 
@@ -15,8 +15,7 @@ const OBJECTIVES = [
 ];
 
 export default async function Profile() {
-  const session = await getSession();
-  if (!session) redirect("/");
+  const session = await requireStudent();
 
   const [profile, weightEntries] = await Promise.all([
     db.userProfile.findUnique({ where: { userId: session.user.id } }),
@@ -29,8 +28,7 @@ export default async function Profile() {
 
   async function saveProfile(formData: FormData) {
     "use server";
-    const s = await getSession();
-    if (!s) redirect("/");
+    const s = await requireStudent();
 
     const name = (formData.get("name") as string)?.trim();
     const ageRaw = formData.get("age") as string;
@@ -65,8 +63,7 @@ export default async function Profile() {
 
   async function addWeight(formData: FormData) {
     "use server";
-    const s = await getSession();
-    if (!s) redirect("/");
+    const s = await requireStudent();
 
     const weight = parseFloat(formData.get("newWeight") as string);
     if (!isNaN(weight) && weight > 0) {

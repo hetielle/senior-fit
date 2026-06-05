@@ -1,25 +1,24 @@
-import { redirect } from "next/navigation";
 import Image from "next/image";
-import { getSession } from "pnpm/server/better-auth/server";
 import { db } from "pnpm/server/db";
+import { requireStudent } from "pnpm/server/better-auth/guards";
 import logo from "../imgs/logo.png";
 import "./page.css";
 
-const WEEK: { dayOfWeek: number; label: string; dayType: string | null }[] = [
-  { dayOfWeek: 1, label: "Segunda-feira", dayType: "upper" },
-  { dayOfWeek: 2, label: "Terça-feira", dayType: "lower" },
-  { dayOfWeek: 3, label: "Quarta-feira", dayType: "core" },
-  { dayOfWeek: 4, label: "Quinta-feira", dayType: "upper" },
-  { dayOfWeek: 5, label: "Sexta-feira", dayType: "full" },
-  { dayOfWeek: 6, label: "Sábado", dayType: "stretch" },
-  { dayOfWeek: 0, label: "Domingo", dayType: null },
+const WEEK: { dayOfWeek: number; label: string }[] = [
+  { dayOfWeek: 1, label: "Segunda-feira" },
+  { dayOfWeek: 2, label: "Terça-feira" },
+  { dayOfWeek: 3, label: "Quarta-feira" },
+  { dayOfWeek: 4, label: "Quinta-feira" },
+  { dayOfWeek: 5, label: "Sexta-feira" },
+  { dayOfWeek: 6, label: "Sábado" },
+  { dayOfWeek: 0, label: "Domingo" },
 ];
 
 export default async function Schedule() {
-  const session = await getSession();
-  if (!session) redirect("/");
+  const session = await requireStudent();
 
-  const workouts = await db.workout.findMany({
+  const studentWorkouts = await db.studentWorkout.findMany({
+    where: { studentId: session.user.id },
     include: {
       items: {
         orderBy: { order: "asc" },
@@ -28,8 +27,8 @@ export default async function Schedule() {
     },
   });
 
-  const workoutByType = Object.fromEntries(
-    workouts.map((w) => [w.dayType, w]),
+  const workoutByDay = Object.fromEntries(
+    studentWorkouts.map((w) => [w.dayOfWeek, w]),
   );
 
   const todayDow = new Date().getDay();
@@ -55,8 +54,8 @@ export default async function Schedule() {
         <h1 className="schedule-title">Treinos da Semana</h1>
 
         <div className="week-list">
-          {WEEK.map(({ dayOfWeek, label, dayType }) => {
-            const workout = dayType ? workoutByType[dayType] : null;
+          {WEEK.map(({ dayOfWeek, label }) => {
+            const workout = workoutByDay[dayOfWeek] ?? null;
             const isToday = dayOfWeek === todayDow;
 
             return (
@@ -72,7 +71,7 @@ export default async function Schedule() {
                   {workout ? (
                     <span className="day-workout-title">{workout.title}</span>
                   ) : (
-                    <span className="day-rest">Descanso</span>
+                    <span className="day-rest">Sem treino</span>
                   )}
                 </div>
 
