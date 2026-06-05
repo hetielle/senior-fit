@@ -1,0 +1,112 @@
+@reference "../globals.css";
+
+.profile-wrapper {
+  @apply min-h-screen bg-zinc-50 dark:bg-black;
+}
+
+.profile-header {
+  @apply flex items-center justify-between border-b border-zinc-200 bg-white px-8 py-4 dark:border-zinc-800 dark:bg-zinc-950;
+}
+
+.profile-logo {
+  width: 120px;
+  height: auto;
+}
+
+.header-nav {
+  @apply flex gap-1;
+}
+
+.nav-link {
+  @apply rounded-lg px-4 py-2 text-sm font-medium text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50;
+}
+
+.nav-link-active {
+  @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50;
+}
+
+.profile-main {
+  @apply mx-auto max-w-2xl px-6 py-10;
+}
+
+.profile-title {
+  @apply mb-8 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50;
+}
+
+.profile-section {
+  @apply mb-6 rounded-2xl border border-zinc-200 bg-white px-6 py-5 dark:border-zinc-800 dark:bg-zinc-900;
+}
+
+.section-title {
+  @apply mb-4 text-base font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.fields-grid {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.field-group {
+  @apply flex flex-col gap-1.5;
+}
+
+.field-label {
+  @apply text-sm font-medium text-zinc-700 dark:text-zinc-300;
+}
+
+.field-input {
+  @apply h-10 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 focus:ring-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-500 dark:focus:ring-zinc-800;
+}
+
+.btn-save {
+  @apply mt-2 h-10 w-full rounded-lg bg-zinc-900 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200;
+}
+
+/* Weight progression */
+
+.weight-section {
+  @apply mt-2;
+}
+
+.add-weight-form {
+  @apply mb-4 flex gap-2;
+}
+
+.btn-add-weight {
+  @apply h-10 shrink-0 rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200;
+}
+
+.weight-list {
+  @apply flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+}
+
+.weight-entry {
+  @apply flex items-center justify-between py-3;
+}
+
+.weight-date {
+  @apply text-sm text-zinc-500 dark:text-zinc-400;
+}
+
+.weight-right {
+  @apply flex items-center gap-3;
+}
+
+.weight-diff {
+  @apply text-xs font-medium;
+}
+
+.weight-diff-up {
+  @apply text-red-500;
+}
+
+.weight-diff-down {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.weight-value {
+  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.weight-empty {
+  @apply text-sm text-zinc-400 dark:text-zinc-500;
+}

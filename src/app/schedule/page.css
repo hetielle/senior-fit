@@ -1,0 +1,94 @@
+@reference "../globals.css";
+
+.schedule-wrapper {
+  @apply min-h-screen bg-zinc-50 dark:bg-black;
+}
+
+.schedule-header {
+  @apply flex items-center justify-between border-b border-zinc-200 bg-white px-8 py-4 dark:border-zinc-800 dark:bg-zinc-950;
+}
+
+.schedule-logo {
+  width: 120px;
+  height: auto;
+}
+
+.header-nav {
+  @apply flex gap-1;
+}
+
+.nav-link {
+  @apply rounded-lg px-4 py-2 text-sm font-medium text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50;
+}
+
+.nav-link-active {
+  @apply bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50;
+}
+
+.schedule-main {
+  @apply mx-auto max-w-2xl px-6 py-10;
+}
+
+.schedule-title {
+  @apply mb-6 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50;
+}
+
+.week-list {
+  @apply flex flex-col gap-3;
+}
+
+/* Day card */
+
+.day-card {
+  @apply rounded-2xl border border-zinc-200 bg-white px-5 py-4 dark:border-zinc-800 dark:bg-zinc-900;
+}
+
+.day-card-today {
+  @apply border-zinc-900 dark:border-zinc-400;
+}
+
+.day-card-header {
+  @apply flex items-center justify-between;
+}
+
+.day-label-row {
+  @apply flex items-center gap-2;
+}
+
+.day-label {
+  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+.today-badge {
+  @apply rounded-full bg-zinc-900 px-2 py-0.5 text-xs font-medium text-white dark:bg-zinc-100 dark:text-zinc-900;
+}
+
+.day-workout-title {
+  @apply text-sm font-medium text-zinc-500 dark:text-zinc-400;
+}
+
+.day-rest {
+  @apply text-sm text-zinc-400 dark:text-zinc-500;
+}
+
+/* Exercise list inside a day */
+
+.day-exercise-list {
+  @apply mt-3 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+}
+
+.day-exercise-item {
+  @apply flex items-center justify-between py-2;
+}
+
+.day-exercise-name {
+  @apply flex flex-col text-sm text-zinc-700 dark:text-zinc-300;
+}
+
+.day-exercise-muscle {
+  @apply text-xs text-zinc-400 dark:text-zinc-500;
+}
+
+.day-exercise-volume {
+  @apply shrink-0 text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}

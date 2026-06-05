@@ -71,6 +71,17 @@ export default async function Workouts() {
           <p className="greeting-date">{dateLabel}</p>
           <h1 className="greeting-name">Olá, {firstName}!</h1>
         </div>
+        <nav className="header-nav">
+          <a href="/workouts" className="nav-link nav-link-active">
+            Hoje
+          </a>
+          <a href="/schedule" className="nav-link">
+            Semana
+          </a>
+          <a href="/profile" className="nav-link">
+            Perfil
+          </a>
+        </nav>
       </header>
 
       <main className="workouts-main">
