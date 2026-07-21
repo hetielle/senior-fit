@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { db } from "pnpm/server/db";
 import { requireInstructor } from "pnpm/server/better-auth/guards";
-import logo from "../../imgs/logo.png";
+import { AppHeader } from "../../_components/AppHeader";
 import "./page.css";
 
 export default async function InstructorStudents() {
@@ -15,14 +14,7 @@ export default async function InstructorStudents() {
 
   return (
     <div className="instructor-wrapper">
-      <header className="instructor-header">
-        <Image src={logo} alt="Logo" className="instructor-logo" />
-        <nav className="header-nav">
-          <a href="/instructor/students" className="nav-link nav-link-active">
-            Meus Alunos
-          </a>
-        </nav>
-      </header>
+      <AppHeader activePath="/instructor/students" />
 
       <main className="instructor-main">
         <h1 className="instructor-title">Meus Alunos</h1>

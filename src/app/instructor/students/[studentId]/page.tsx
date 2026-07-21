@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { db } from "pnpm/server/db";
 import { requireInstructor } from "pnpm/server/better-auth/guards";
-import logo from "../../../imgs/logo.png";
 import { WorkoutPlanEditor } from "../../../_components/WorkoutPlanEditor";
+import { AppHeader } from "../../../_components/AppHeader";
 import "./page.css";
 
 type Props = { params: Promise<{ studentId: string }> };
@@ -41,14 +40,7 @@ export default async function StudentDetail({ params }: Props) {
 
   return (
     <div className="student-detail-wrapper">
-      <header className="student-detail-header">
-        <Image src={logo} alt="Logo" className="student-detail-logo" />
-        <nav className="header-nav">
-          <a href="/instructor/students" className="nav-link">
-            ← Alunos
-          </a>
-        </nav>
-      </header>
+      <AppHeader activePath="/instructor/students" />
 
       <main className="student-detail-main">
         {/* Student info */}

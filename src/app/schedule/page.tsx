@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { db } from "pnpm/server/db";
 import { requireStudent } from "pnpm/server/better-auth/guards";
-import logo from "../imgs/logo.png";
+import { AppHeader } from "../_components/AppHeader";
 import "./page.css";
 
 const WEEK: { dayOfWeek: number; label: string }[] = [
@@ -35,20 +34,7 @@ export default async function Schedule() {
 
   return (
     <div className="schedule-wrapper">
-      <header className="schedule-header">
-        <Image src={logo} alt="Logo" className="schedule-logo" />
-        <nav className="header-nav">
-          <a href="/workouts" className="nav-link">
-            Hoje
-          </a>
-          <a href="/schedule" className="nav-link nav-link-active">
-            Semana
-          </a>
-          <a href="/profile" className="nav-link">
-            Perfil
-          </a>
-        </nav>
-      </header>
+      <AppHeader activePath="/schedule" />
 
       <main className="schedule-main">
         <h1 className="schedule-title">Treinos da Semana</h1>

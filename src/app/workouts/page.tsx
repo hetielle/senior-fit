@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { db } from "pnpm/server/db";
 import { requireStudent } from "pnpm/server/better-auth/guards";
-import logo from "../imgs/logo.png";
 import { ExerciseList } from "../_components/ExerciseList";
+import { AppHeader } from "../_components/AppHeader";
 import "./page.css";
 
 const DAYS_PT = [
@@ -63,26 +62,13 @@ export default async function Workouts() {
 
   return (
     <div className="workouts-wrapper">
-      <header className="workouts-header">
-        <Image src={logo} alt="Logo" className="workouts-logo" />
-        <div className="workouts-greeting">
-          <p className="greeting-date">{dateLabel}</p>
-          <h1 className="greeting-name">Olá, {firstName}!</h1>
-        </div>
-        <nav className="header-nav">
-          <a href="/workouts" className="nav-link nav-link-active">
-            Hoje
-          </a>
-          <a href="/schedule" className="nav-link">
-            Semana
-          </a>
-          <a href="/profile" className="nav-link">
-            Perfil
-          </a>
-        </nav>
-      </header>
+      <AppHeader activePath="/workouts" />
 
       <main className="workouts-main">
+        <div className="workouts-greeting">
+          <p className="greeting-date">{dateLabel}</p>
+          <h2 className="greeting-name">Olá, {firstName}!</h2>
+        </div>
         {workout ? (
           <>
             <div className="workout-header">

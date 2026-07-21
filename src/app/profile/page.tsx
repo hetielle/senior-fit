@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import { db } from "pnpm/server/db";
 import { requireStudent } from "pnpm/server/better-auth/guards";
-import logo from "../imgs/logo.png";
+import { AppHeader } from "../_components/AppHeader";
 import "./page.css";
 
 const OBJECTIVES = [
@@ -75,20 +74,7 @@ export default async function Profile() {
 
   return (
     <div className="profile-wrapper">
-      <header className="profile-header">
-        <Image src={logo} alt="Logo" className="profile-logo" />
-        <nav className="header-nav">
-          <a href="/workouts" className="nav-link">
-            Hoje
-          </a>
-          <a href="/schedule" className="nav-link">
-            Semana
-          </a>
-          <a href="/profile" className="nav-link nav-link-active">
-            Perfil
-          </a>
-        </nav>
-      </header>
+      <AppHeader activePath="/profile" />
 
       <main className="profile-main">
         <h1 className="profile-title">Meu Perfil</h1>
