@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { db } from "pnpm/server/db";
 import { requireStudent } from "pnpm/server/better-auth/guards";
 import { AppHeader } from "../_components/AppHeader";
+import { SubmitButton } from "../_components/SubmitButton";
 import "./page.css";
 
 const OBJECTIVES = [
@@ -168,9 +169,7 @@ export default async function Profile() {
             </div>
           </section>
 
-          <button type="submit" className="btn-save">
-            Salvar perfil
-          </button>
+          <SubmitButton label="Salvar perfil" loadingLabel="Salvando..." className="btn-save" />
         </form>
 
         <section className="profile-section weight-section">
@@ -187,9 +186,7 @@ export default async function Profile() {
               placeholder="Registrar novo peso (kg)"
               required
             />
-            <button type="submit" className="btn-add-weight">
-              Registrar
-            </button>
+            <SubmitButton label="Registrar" loadingLabel="Registrando..." className="btn-add-weight" />
           </form>
 
           {weightEntries.length > 0 ? (

@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 import { TRPCReactProvider } from "pnpm/trpc/react";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body>
+        <NextTopLoader color="#18181b" shadow={false} showSpinner={false} />
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>

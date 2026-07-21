@@ -41,6 +41,7 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
   const [newSets, setNewSets] = useState("3");
   const [newReps, setNewReps] = useState("10");
   const [newDuration, setNewDuration] = useState("");
+  const [removingItemId, setRemovingItemId] = useState<string | null>(null);
 
   const upsert = api.studentWorkout.upsertStudentWorkout.useMutation({
     onSuccess: (data) => {
@@ -60,6 +61,8 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
   });
 
   const removeItem = api.studentWorkout.removeItem.useMutation({
+    onMutate: ({ itemId }) => setRemovingItemId(itemId),
+    onSettled: () => setRemovingItemId(null),
     onSuccess: (_data, { itemId }) => {
       setPlan((prev) => {
         const day = prev[selectedDay];
@@ -128,7 +131,7 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
                 onClick={handleDeleteWorkout}
                 disabled={deleteWorkout.isPending}
               >
-                Excluir dia
+                {deleteWorkout.isPending ? "Excluindo..." : "Excluir dia"}
               </button>
             </div>
 
@@ -150,10 +153,10 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
                       <button
                         className="btn-remove-item"
                         onClick={() => removeItem.mutate({ itemId: item.id })}
-                        disabled={removeItem.isPending}
+                        disabled={removingItemId === item.id}
                         aria-label="Remover exercício"
                       >
-                        ×
+                        {removingItemId === item.id ? "·" : "×"}
                       </button>
                     </div>
                   </li>
@@ -205,7 +208,7 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
                 onClick={handleAddExercise}
                 disabled={addItem.isPending || !selectedExerciseId}
               >
-                Adicionar
+                {addItem.isPending ? "Adicionando..." : "Adicionar"}
               </button>
             </div>
           </>
@@ -225,7 +228,7 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
                 onClick={handleCreateWorkout}
                 disabled={upsert.isPending}
               >
-                Criar treino
+                {upsert.isPending ? "Criando..." : "Criar treino"}
               </button>
             </div>
           </div>

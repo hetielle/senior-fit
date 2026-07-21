@@ -92,6 +92,10 @@
   @apply border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900;
 }
 
+.check-btn-loading {
+  @apply animate-pulse cursor-wait;
+}
+
 .rest-day {
   @apply flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white px-8 py-16 text-center dark:border-zinc-800 dark:bg-zinc-900;
 }

@@ -30,9 +30,11 @@ export function ExerciseList({ items }: { items: Item[] }) {
           .map((item) => item.id),
       ),
   );
+  const [pendingId, setPendingId] = useState<string | null>(null);
 
   const toggle = api.studentWorkout.toggleCompletion.useMutation({
     onMutate: ({ studentWorkoutItemId }) => {
+      setPendingId(studentWorkoutItemId);
       setCompletedIds((prev) => {
         const next = new Set(prev);
         if (next.has(studentWorkoutItemId)) {
@@ -43,6 +45,7 @@ export function ExerciseList({ items }: { items: Item[] }) {
         return next;
       });
     },
+    onSettled: () => setPendingId(null),
     onError: (_err, { studentWorkoutItemId }) => {
       // revert on error
       setCompletedIds((prev) => {
@@ -61,6 +64,7 @@ export function ExerciseList({ items }: { items: Item[] }) {
     <div className="exercise-list">
       {items.map((item) => {
         const done = completedIds.has(item.id);
+        const loading = pendingId === item.id;
         return (
           <div
             key={item.id}
@@ -90,16 +94,17 @@ export function ExerciseList({ items }: { items: Item[] }) {
                   )}
                 </div>
                 <button
-                  className={`check-btn ${done ? "check-btn-done" : ""}`}
+                  className={`check-btn ${done ? "check-btn-done" : ""} ${loading ? "check-btn-loading" : ""}`}
                   onClick={() =>
                     toggle.mutate({
                       studentWorkoutItemId: item.id,
                       date: today,
                     })
                   }
+                  disabled={loading}
                   aria-label={done ? "Desmarcar" : "Marcar como feito"}
                 >
-                  {done ? "✓" : "○"}
+                  {loading ? "·" : done ? "✓" : "○"}
                 </button>
               </div>
             </div>
