@@ -11,7 +11,7 @@ export default async function StudentDetail({ params }: Props) {
   await requireInstructor();
   const { studentId } = await params;
 
-  const [student, studentWorkouts, allExercises] = await Promise.all([
+  const [student, studentWorkouts, allExercises, completions] = await Promise.all([
     db.user.findUnique({
       where: { id: studentId },
       include: {
@@ -26,9 +26,25 @@ export default async function StudentDetail({ params }: Props) {
       },
     }),
     db.exercise.findMany({ orderBy: { name: "asc" } }),
+    db.exerciseCompletion.findMany({
+      where: { studentId },
+      orderBy: { date: "desc" },
+      take: 30,
+      include: { studentWorkoutItem: { include: { exercise: true, studentWorkout: true } } },
+    }),
   ]);
 
   if (!student) notFound();
+
+  // Group completions by date for the activity log
+  const completionsByDate = completions.reduce<
+    Record<string, typeof completions>
+  >((acc, c) => {
+    const key = c.date.toISOString().split("T")[0]!;
+    (acc[key] ??= []).push(c);
+    return acc;
+  }, {});
+  const completionDates = Object.keys(completionsByDate).sort().reverse();
 
   const initialPlan = Object.fromEntries(
     studentWorkouts.map((w) => [w.dayOfWeek, w]),
@@ -67,24 +83,66 @@ export default async function StudentDetail({ params }: Props) {
                 <span className="profile-field-value">{student.profile.objective}</span>
               </div>
             )}
-            {student.profile?.height && (
-              <div className="profile-field">
-                <span className="profile-field-label">Altura</span>
-                <span className="profile-field-value">{student.profile.height} cm</span>
-              </div>
+            {!student.profile?.age && !student.profile?.phone && !student.profile?.objective && (
+              <p className="profile-empty">Perfil não preenchido pelo aluno.</p>
             )}
-            {student.profile?.weight && (
-              <div className="profile-field">
-                <span className="profile-field-label">Peso</span>
-                <span className="profile-field-value">{student.profile.weight} kg</span>
+            <div className="profile-field">
+              <span className="profile-field-label">Membro desde</span>
+              <span className="profile-field-value">
+                {student.createdAt.toLocaleDateString("pt-BR")}
+              </span>
+            </div>
+          </div>
+
+          {/* Body composition */}
+          <div className="body-comp">
+            <h2 className="body-comp-title">Composição Corporal</h2>
+            {student.profile?.height ?? student.profile?.weight ? (
+              <div className="body-comp-grid">
+                {student.profile?.height && (
+                  <div className="body-comp-stat">
+                    <span className="body-comp-value">{student.profile.height}</span>
+                    <span className="body-comp-unit">cm</span>
+                    <span className="body-comp-label">Altura</span>
+                  </div>
+                )}
+                {student.profile?.weight && (
+                  <div className="body-comp-stat">
+                    <span className="body-comp-value">{student.profile.weight}</span>
+                    <span className="body-comp-unit">kg</span>
+                    <span className="body-comp-label">Peso</span>
+                  </div>
+                )}
+                {student.profile?.height && student.profile?.weight && (() => {
+                  const bmi = student.profile.weight / Math.pow(student.profile.height / 100, 2);
+                  const category =
+                    bmi < 18.5 ? "Abaixo do peso"
+                    : bmi < 25 ? "Peso normal"
+                    : bmi < 30 ? "Sobrepeso"
+                    : "Obesidade";
+                  const categoryClass =
+                    bmi < 18.5 ? "bmi-low"
+                    : bmi < 25 ? "bmi-normal"
+                    : bmi < 30 ? "bmi-over"
+                    : "bmi-obese";
+                  return (
+                    <div className="body-comp-stat">
+                      <span className="body-comp-value">{bmi.toFixed(1)}</span>
+                      <span className="body-comp-unit">IMC</span>
+                      <span className={`body-comp-bmi-category ${categoryClass}`}>{category}</span>
+                    </div>
+                  );
+                })()}
               </div>
+            ) : (
+              <p className="profile-empty">Altura e peso não informados.</p>
             )}
           </div>
 
           {/* Weight progression */}
-          {student.weightEntries.length > 0 && (
-            <div className="weight-history">
-              <h2 className="weight-history-title">Progressão de Peso</h2>
+          <div className="weight-history">
+            <h2 className="weight-history-title">Progressão de Peso</h2>
+            {student.weightEntries.length > 0 ? (
               <ul className="weight-history-list">
                 {student.weightEntries.map((entry, i) => {
                   const prev = student.weightEntries[i + 1];
@@ -109,7 +167,43 @@ export default async function StudentDetail({ params }: Props) {
                   );
                 })}
               </ul>
-            </div>
+            ) : (
+              <p className="profile-empty">Nenhum registro de peso ainda.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Activity history */}
+        <div className="student-info-card">
+          <h2 className="weight-history-title" style={{ marginBottom: 0 }}>Histórico de Atividades</h2>
+          {completionDates.length === 0 ? (
+            <p className="activity-empty">Nenhum treino realizado ainda.</p>
+          ) : (
+            <ul className="activity-list">
+              {completionDates.map((dateKey) => {
+                const items = completionsByDate[dateKey]!;
+                const date = new Date(dateKey + "T12:00:00");
+                return (
+                  <li key={dateKey} className="activity-day">
+                    <span className="activity-date">
+                      {date.toLocaleDateString("pt-BR")}
+                    </span>
+                    <ul className="activity-exercises">
+                      {items.map((c) => (
+                        <li key={c.id} className="activity-exercise">
+                          <span className="activity-exercise-name">
+                            {c.studentWorkoutItem.exercise.name}
+                          </span>
+                          <span className="activity-exercise-workout">
+                            {c.studentWorkoutItem.studentWorkout.title}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
           )}
         </div>
 

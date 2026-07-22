@@ -38,6 +38,60 @@
   @apply text-sm font-medium text-zinc-900 dark:text-zinc-50;
 }
 
+.profile-empty {
+  @apply col-span-2 text-sm text-zinc-400 dark:text-zinc-500;
+}
+
+/* Body composition */
+
+.body-comp {
+  @apply mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800;
+}
+
+.body-comp-title {
+  @apply mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300;
+}
+
+.body-comp-grid {
+  @apply flex gap-4;
+}
+
+.body-comp-stat {
+  @apply flex flex-1 flex-col items-center rounded-xl border border-zinc-100 bg-zinc-50 py-4 dark:border-zinc-800 dark:bg-zinc-950;
+}
+
+.body-comp-value {
+  @apply text-2xl font-bold text-zinc-900 dark:text-zinc-50;
+}
+
+.body-comp-unit {
+  @apply text-xs font-medium text-zinc-400 dark:text-zinc-500;
+}
+
+.body-comp-label {
+  @apply mt-1 text-xs text-zinc-500 dark:text-zinc-400;
+}
+
+.body-comp-bmi-category {
+  @apply mt-1 text-xs font-medium;
+}
+
+.bmi-low {
+  @apply text-blue-500;
+}
+
+.bmi-normal {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.bmi-over {
+  @apply text-amber-500;
+}
+
+.bmi-obese {
+  @apply text-red-500;
+}
+
 /* Weight history */
 
 .weight-history {
@@ -78,6 +132,40 @@
 
 .weight-history-value {
   @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+}
+
+/* Activity history */
+
+.activity-empty {
+  @apply mt-3 text-sm text-zinc-400 dark:text-zinc-500;
+}
+
+.activity-list {
+  @apply mt-3 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+}
+
+.activity-day {
+  @apply py-3;
+}
+
+.activity-date {
+  @apply mb-1.5 block text-xs font-semibold text-zinc-500 dark:text-zinc-400;
+}
+
+.activity-exercises {
+  @apply flex flex-col gap-1;
+}
+
+.activity-exercise {
+  @apply flex items-center justify-between;
+}
+
+.activity-exercise-name {
+  @apply text-sm text-zinc-800 dark:text-zinc-200;
+}
+
+.activity-exercise-workout {
+  @apply text-xs text-zinc-400 dark:text-zinc-500;
 }
 
 /* Workout plan editor section */
@@ -195,6 +283,46 @@
 
 .create-workout-row {
   @apply flex gap-2;
+}
+
+.day-panel-title-btn {
+  @apply flex cursor-pointer items-center gap-1.5 rounded-md px-1 -mx-1 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-100 dark:text-zinc-50 dark:hover:bg-zinc-800;
+}
+
+.title-edit-icon {
+  @apply text-xs text-zinc-400 dark:text-zinc-500;
+}
+
+.title-edit-row {
+  @apply flex flex-1 items-center gap-2;
+}
+
+.title-input {
+  @apply flex-1;
+}
+
+.btn-save-title {
+  @apply h-8 shrink-0 rounded-lg bg-zinc-900 px-3 text-xs font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300;
+}
+
+.btn-cancel-title {
+  @apply h-8 shrink-0 rounded-lg px-3 text-xs font-medium text-zinc-500 transition hover:bg-zinc-100 dark:hover:bg-zinc-800;
+}
+
+.btn-edit-item {
+  @apply flex h-6 w-6 items-center justify-center rounded-full text-zinc-400 transition hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200;
+}
+
+.editor-exercise-item-editing {
+  @apply flex-col items-start gap-2 py-3;
+}
+
+.item-edit-row {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.btn-done-exercise {
+  @apply h-9 shrink-0 rounded-lg border border-zinc-300 px-4 text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800;
 }
 
 .btn-create-workout {

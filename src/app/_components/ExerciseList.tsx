@@ -87,7 +87,7 @@ export function ExerciseList({ items }: { items: Item[] }) {
                   ) : (
                     <>
                       <span className="volume-number">
-                        {item.sets}×{item.reps}
+                        {item.reps ? `${item.sets}×${item.reps}` : `${item.sets} séries`}
                       </span>
                       <span className="volume-label">séries × reps</span>
                     </>

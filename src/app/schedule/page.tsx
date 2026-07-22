@@ -74,7 +74,9 @@ export default async function Schedule() {
                         <span className="day-exercise-volume">
                           {item.durationSecs
                             ? `${item.sets}× ${item.durationSecs}s`
-                            : `${item.sets}×${item.reps}`}
+                            : item.reps
+                            ? `${item.sets}×${item.reps}`
+                            : `${item.sets} séries`}
                         </span>
                       </li>
                     ))}
