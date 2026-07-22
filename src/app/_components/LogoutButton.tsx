@@ -15,8 +15,19 @@ export function LogoutButton() {
   }
 
   return (
-    <button onClick={handleLogout} className="btn-logout" disabled={isPending}>
-      {isPending ? "Saindo..." : "Sair"}
-    </button>
+    <>
+      <button onClick={handleLogout} className="btn-logout" disabled={isPending}>
+        Sair
+      </button>
+
+      {isPending && (
+        <div className="logout-overlay">
+          <div className="logout-modal">
+            <div className="logout-spinner" />
+            <p className="logout-modal-text">Saindo...</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
