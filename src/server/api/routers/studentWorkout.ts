@@ -70,7 +70,8 @@ export const studentWorkoutRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const date = new Date(input.date);
+      const [year, month, day] = input.date.split("-").map(Number);
+      const date = new Date(year!, month! - 1, day!);
       date.setHours(0, 0, 0, 0);
 
       const existing = await ctx.db.exerciseCompletion.findUnique({

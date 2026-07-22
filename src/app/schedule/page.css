@@ -26,6 +26,18 @@
   @apply border-zinc-900 dark:border-zinc-400;
 }
 
+.day-card-done {
+  @apply border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/40;
+}
+
+.day-card-partial {
+  @apply border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/30;
+}
+
+.day-card-missed {
+  @apply border-zinc-200 bg-zinc-50 opacity-60 dark:border-zinc-800 dark:bg-zinc-900;
+}
+
 .day-card-header {
   @apply flex items-center justify-between;
 }
@@ -40,6 +52,22 @@
 
 .today-badge {
   @apply rounded-full bg-zinc-900 px-2 py-0.5 text-xs font-medium text-white dark:bg-zinc-100 dark:text-zinc-900;
+}
+
+.day-completion-badge {
+  @apply rounded-full px-2 py-0.5 text-xs font-medium;
+}
+
+.badge-done {
+  @apply bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-400;
+}
+
+.badge-partial {
+  @apply bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-400;
+}
+
+.badge-missed {
+  @apply bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400;
 }
 
 .day-workout-title {
@@ -60,12 +88,29 @@
   @apply flex items-center justify-between py-2;
 }
 
+.day-exercise-done {
+  .day-exercise-name {
+    @apply text-zinc-400 line-through dark:text-zinc-500;
+  }
+  .day-exercise-muscle {
+    @apply text-zinc-300 dark:text-zinc-600;
+  }
+}
+
 .day-exercise-name {
   @apply flex flex-col text-sm text-zinc-700 dark:text-zinc-300;
 }
 
 .day-exercise-muscle {
   @apply text-xs text-zinc-400 dark:text-zinc-500;
+}
+
+.day-exercise-right {
+  @apply flex items-center gap-2;
+}
+
+.day-exercise-check {
+  @apply text-xs font-bold text-green-600 dark:text-green-400;
 }
 
 .day-exercise-volume {

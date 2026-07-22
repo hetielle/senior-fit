@@ -20,7 +20,8 @@ type Item = {
 };
 
 export function ExerciseList({ items }: { items: Item[] }) {
-  const today = new Date().toISOString().split("T")[0]!;
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 
   const [completedIds, setCompletedIds] = useState<Set<string>>(
     () =>
@@ -62,6 +63,17 @@ export function ExerciseList({ items }: { items: Item[] }) {
 
   return (
     <div className="exercise-list">
+      <div className="exercise-progress">
+        <span className="exercise-progress-text">
+          {completedIds.size} / {items.length} concluídos
+        </span>
+        <div className="exercise-progress-bar">
+          <div
+            className="exercise-progress-fill"
+            style={{ width: `${items.length === 0 ? 0 : (completedIds.size / items.length) * 100}%` }}
+          />
+        </div>
+      </div>
       {items.map((item) => {
         const done = completedIds.has(item.id);
         const loading = pendingId === item.id;
