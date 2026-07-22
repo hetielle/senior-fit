@@ -7,6 +7,21 @@ import "./page.css";
 
 type Props = { params: Promise<{ studentId: string }> };
 
+function getWeightDiffClass(diff: number, objective: string | null): string {
+  if (diff === 0) return "weight-diff-neutral";
+  if (objective === "Manter peso") return "weight-diff-neutral";
+  if (objective === "Ganhar massa muscular") {
+    return diff > 0 ? "weight-diff-positive" : "weight-diff-negative";
+  }
+  return diff < 0 ? "weight-diff-positive" : "weight-diff-negative";
+}
+
+function getDiffLabel(diff: number, objective: string | null): string {
+  if (objective === "Manter peso") return diff === 0 ? " ✓" : "";
+  if (objective === "Ganhar massa muscular") return diff > 0 ? " ↑" : diff < 0 ? " ↓" : "";
+  return diff < 0 ? " ↓" : diff > 0 ? " ↑" : "";
+}
+
 export default async function StudentDetail({ params }: Props) {
   await requireInstructor();
   const { studentId } = await params;
@@ -147,6 +162,8 @@ export default async function StudentDetail({ params }: Props) {
                 {student.weightEntries.map((entry, i) => {
                   const prev = student.weightEntries[i + 1];
                   const diff = prev ? entry.weight - prev.weight : null;
+                  const diffClass = diff === null ? "" : getWeightDiffClass(diff, student.profile?.objective ?? null);
+                  const diffLabel = diff === null ? "" : getDiffLabel(diff, student.profile?.objective ?? null);
                   return (
                     <li key={entry.id} className="weight-history-item">
                       <span className="weight-history-date">
@@ -154,11 +171,9 @@ export default async function StudentDetail({ params }: Props) {
                       </span>
                       <div className="weight-history-right">
                         {diff !== null && (
-                          <span
-                            className={`weight-diff ${diff > 0 ? "weight-diff-up" : "weight-diff-down"}`}
-                          >
-                            {diff > 0 ? "+" : ""}
-                            {diff.toFixed(1)} kg
+                          <span className={`weight-diff ${diffClass}`}>
+                            {diff > 0 ? "+" : ""}{diff.toFixed(1)} kg
+                            <span className="weight-diff-label">{diffLabel}</span>
                           </span>
                         )}
                         <span className="weight-history-value">{entry.weight} kg</span>

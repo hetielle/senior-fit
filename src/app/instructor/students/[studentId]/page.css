@@ -122,12 +122,20 @@
   @apply text-xs font-medium;
 }
 
-.weight-diff-up {
+.weight-diff-positive {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.weight-diff-negative {
   @apply text-red-500;
 }
 
-.weight-diff-down {
-  @apply text-green-600 dark:text-green-400;
+.weight-diff-neutral {
+  @apply text-amber-500 dark:text-amber-400;
+}
+
+.weight-diff-label {
+  @apply ml-0.5;
 }
 
 .weight-history-value {

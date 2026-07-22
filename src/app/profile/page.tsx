@@ -14,6 +14,22 @@ const OBJECTIVES = [
   "Reabilitação",
 ];
 
+function getWeightDiffClass(diff: number, objective: string | null): string {
+  if (diff === 0) return "weight-diff-neutral";
+  if (objective === "Manter peso") return "weight-diff-neutral";
+  if (objective === "Ganhar massa muscular") {
+    return diff > 0 ? "weight-diff-positive" : "weight-diff-negative";
+  }
+  // Default: "Perder peso" and others treat weight loss as positive
+  return diff < 0 ? "weight-diff-positive" : "weight-diff-negative";
+}
+
+function getDiffLabel(diff: number, objective: string | null): string {
+  if (objective === "Manter peso") return diff === 0 ? " ✓" : "";
+  if (objective === "Ganhar massa muscular") return diff > 0 ? " ↑" : diff < 0 ? " ↓" : "";
+  return diff < 0 ? " ↓" : diff > 0 ? " ↑" : "";
+}
+
 export default async function Profile() {
   const session = await requireStudent();
 
@@ -194,6 +210,8 @@ export default async function Profile() {
               {weightEntries.map((entry, i) => {
                 const prev = weightEntries[i + 1];
                 const diff = prev ? entry.weight - prev.weight : null;
+                const diffClass = diff === null ? "" : getWeightDiffClass(diff, profile?.objective ?? null);
+                const diffLabel = diff === null ? "" : getDiffLabel(diff, profile?.objective ?? null);
                 return (
                   <li key={entry.id} className="weight-entry">
                     <span className="weight-date">
@@ -201,11 +219,9 @@ export default async function Profile() {
                     </span>
                     <div className="weight-right">
                       {diff !== null && (
-                        <span
-                          className={`weight-diff ${diff > 0 ? "weight-diff-up" : "weight-diff-down"}`}
-                        >
-                          {diff > 0 ? "+" : ""}
-                          {diff.toFixed(1)} kg
+                        <span className={`weight-diff ${diffClass}`}>
+                          {diff > 0 ? "+" : ""}{diff.toFixed(1)} kg
+                          <span className="weight-diff-label">{diffLabel}</span>
                         </span>
                       )}
                       <span className="weight-value">{entry.weight} kg</span>
