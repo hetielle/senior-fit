@@ -28,8 +28,7 @@ export function ScheduleExerciseList({
         return (
           <li
             key={item.id}
-            className={`day-exercise-item day-exercise-expandable ${done ? "day-exercise-done" : ""}`}
-            onClick={() => setExpandedId(expanded ? null : item.id)}
+            className={`day-exercise-item ${done ? "day-exercise-done" : ""}`}
           >
             <div className="day-exercise-item-row">
               <div className="day-exercise-name">
@@ -47,9 +46,13 @@ export function ScheduleExerciseList({
                     ? `${item.sets}×${item.reps}`
                     : `${item.sets} séries`}
                 </span>
-                <span className="day-exercise-chevron">
-                  {expanded ? "▲" : "▼"}
-                </span>
+                <button
+                  className="day-exercise-expand-btn"
+                  onClick={() => setExpandedId(expanded ? null : item.id)}
+                  aria-expanded={expanded}
+                >
+                  {expanded ? "Recolher ▲" : "Ver exercício ▼"}
+                </button>
               </div>
             </div>
             {expanded && <ExerciseSvg exerciseName={item.exercise.name} />}

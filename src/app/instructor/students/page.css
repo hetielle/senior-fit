@@ -5,41 +5,41 @@
 }
 
 .instructor-main {
-  @apply mx-auto max-w-2xl px-6 py-10;
+  @apply mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10;
 }
 
 .instructor-title {
-  @apply mb-6 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50;
+  @apply mb-6 text-3xl font-bold tracking-tight text-zinc-900 sm:mb-8 sm:text-4xl dark:text-zinc-50;
 }
 
 .students-empty {
-  @apply rounded-2xl border border-zinc-200 bg-white px-6 py-12 text-center text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400;
+  @apply rounded-2xl border-2 border-zinc-200 bg-white px-6 py-14 text-center text-lg text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400;
 }
 
 .students-list {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-4;
 }
 
 .student-card {
-  @apply flex items-center justify-between rounded-2xl border border-zinc-200 bg-white px-5 py-4 transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600;
+  @apply flex items-center justify-between rounded-2xl border-2 border-zinc-200 bg-white px-4 py-4 transition hover:border-zinc-400 active:border-zinc-400 active:bg-zinc-50 sm:px-6 sm:py-5 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600 dark:active:bg-zinc-800;
 }
 
 .student-card-info {
-  @apply flex flex-col gap-0.5;
+  @apply flex flex-col gap-1;
 }
 
 .student-name {
-  @apply text-base font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50;
 }
 
 .student-email {
-  @apply text-sm text-zinc-500 dark:text-zinc-400;
+  @apply text-sm text-zinc-500 sm:text-base dark:text-zinc-400;
 }
 
 .student-objective {
-  @apply mt-1 text-xs font-medium text-zinc-400 dark:text-zinc-500;
+  @apply mt-1 text-sm font-semibold text-zinc-400 dark:text-zinc-500;
 }
 
 .student-card-arrow {
-  @apply text-zinc-400 dark:text-zinc-500;
+  @apply text-xl text-zinc-400 dark:text-zinc-500;
 }

@@ -107,6 +107,7 @@ export default async function Profile() {
                   type="text"
                   defaultValue={session.user.name ?? ""}
                   className="field-input"
+                  autoComplete="name"
                 />
               </div>
               <div className="field-group">
@@ -114,6 +115,7 @@ export default async function Profile() {
                 <input
                   name="age"
                   type="number"
+                  inputMode="numeric"
                   min="0"
                   max="120"
                   defaultValue={profile?.age ?? ""}
@@ -126,9 +128,11 @@ export default async function Profile() {
                 <input
                   name="phone"
                   type="tel"
+                  inputMode="tel"
                   defaultValue={profile?.phone ?? ""}
                   className="field-input"
                   placeholder="(11) 99999-9999"
+                  autoComplete="tel"
                 />
               </div>
             </div>
@@ -161,6 +165,7 @@ export default async function Profile() {
                 <input
                   name="height"
                   type="number"
+                  inputMode="decimal"
                   min="50"
                   max="250"
                   step="0.1"
@@ -174,6 +179,7 @@ export default async function Profile() {
                 <input
                   name="weight"
                   type="number"
+                  inputMode="decimal"
                   min="20"
                   max="300"
                   step="0.1"
@@ -195,6 +201,7 @@ export default async function Profile() {
             <input
               name="newWeight"
               type="number"
+              inputMode="decimal"
               min="20"
               max="300"
               step="0.1"

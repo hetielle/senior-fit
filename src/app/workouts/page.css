@@ -5,51 +5,68 @@
 }
 
 .workouts-greeting {
-  @apply mb-6 flex flex-col;
+  @apply mb-6 flex flex-col gap-1;
 }
 
 .greeting-date {
-  @apply text-sm text-zinc-500 dark:text-zinc-400;
+  @apply text-sm text-zinc-500 sm:text-base dark:text-zinc-400;
 }
 
 .greeting-name {
-  @apply text-xl font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply text-xl font-bold text-zinc-900 sm:text-2xl dark:text-zinc-50;
 }
 
 .workouts-main {
-  @apply mx-auto max-w-2xl px-6 py-10;
+  @apply mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10;
 }
 
 .workout-header {
-  @apply mb-6;
+  @apply mb-6 sm:mb-8;
 }
 
 .workout-badge {
-  @apply rounded-full bg-zinc-900 px-3 py-1 text-xs font-medium text-white dark:bg-zinc-100 dark:text-zinc-900;
+  @apply rounded-full bg-zinc-900 px-3 py-1 text-sm font-semibold text-white dark:bg-zinc-100 dark:text-zinc-900;
 }
 
 .workout-title {
-  @apply mt-3 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50;
+  @apply mt-3 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50;
 }
 
 .workout-count {
-  @apply mt-1 text-sm text-zinc-500 dark:text-zinc-400;
+  @apply mt-2 text-base text-zinc-500 dark:text-zinc-400;
 }
 
 .exercise-list {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-4;
 }
 
+.workout-complete-banner {
+  @apply flex items-center gap-4 rounded-2xl border-2 border-green-300 bg-green-50 px-5 py-4 dark:border-green-700 dark:bg-green-950/50;
+}
+
+.workout-complete-icon {
+  @apply text-4xl;
+}
+
+.workout-complete-title {
+  @apply text-lg font-bold text-green-800 dark:text-green-300;
+}
+
+.workout-complete-subtitle {
+  @apply text-sm text-green-700 dark:text-green-400;
+}
+
+
 .exercise-progress {
-  @apply flex flex-col gap-1.5 pb-1;
+  @apply flex flex-col gap-2 pb-2;
 }
 
 .exercise-progress-text {
-  @apply text-sm font-medium text-zinc-500 dark:text-zinc-400;
+  @apply text-base font-semibold text-zinc-500 dark:text-zinc-400;
 }
 
 .exercise-progress-bar {
-  @apply h-1.5 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800;
+  @apply h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800;
 }
 
 .exercise-progress-fill {
@@ -57,19 +74,19 @@
 }
 
 .exercise-card {
-  @apply rounded-2xl border border-zinc-200 bg-white px-5 py-4 dark:border-zinc-800 dark:bg-zinc-900;
+  @apply rounded-2xl border-2 border-zinc-200 bg-white px-4 py-4 sm:px-6 sm:py-5 dark:border-zinc-800 dark:bg-zinc-900;
 }
 
 .exercise-card-top {
-  @apply flex items-start justify-between gap-4;
+  @apply flex items-start justify-between gap-3;
 }
 
 .exercise-name {
-  @apply text-base font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply text-lg font-bold text-zinc-900 sm:text-xl dark:text-zinc-50;
 }
 
 .exercise-muscle {
-  @apply mt-0.5 inline-block text-xs font-medium text-zinc-500 dark:text-zinc-400;
+  @apply mt-1 inline-block text-sm font-semibold text-zinc-500 dark:text-zinc-400;
 }
 
 .exercise-volume {
@@ -77,15 +94,15 @@
 }
 
 .volume-number {
-  @apply text-lg font-bold text-zinc-900 dark:text-zinc-50;
+  @apply text-xl font-extrabold text-zinc-900 sm:text-2xl dark:text-zinc-50;
 }
 
 .volume-label {
-  @apply text-xs text-zinc-400 dark:text-zinc-500;
+  @apply text-sm text-zinc-400 dark:text-zinc-500;
 }
 
 .exercise-description {
-  @apply mt-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400;
+  @apply mt-3 text-base leading-relaxed text-zinc-500 dark:text-zinc-400;
 }
 
 .exercise-card-done {
@@ -109,7 +126,7 @@
 }
 
 .check-btn {
-  @apply flex h-7 w-7 items-center justify-center rounded-full border-2 border-zinc-300 text-sm font-bold text-zinc-400 transition hover:border-zinc-600 hover:text-zinc-600 dark:border-zinc-600 dark:text-zinc-500 dark:hover:border-zinc-300 dark:hover:text-zinc-300;
+  @apply flex min-h-12 min-w-16 items-center justify-center rounded-full border-3 border-zinc-300 px-2 text-sm font-bold text-zinc-400 transition hover:border-zinc-600 hover:text-zinc-600 active:scale-95 active:border-zinc-600 dark:border-zinc-600 dark:text-zinc-500 dark:hover:border-zinc-300 dark:hover:text-zinc-300;
 }
 
 .check-btn-done {
@@ -121,17 +138,17 @@
 }
 
 .rest-day {
-  @apply flex flex-col items-center justify-center rounded-2xl border border-zinc-200 bg-white px-8 py-16 text-center dark:border-zinc-800 dark:bg-zinc-900;
+  @apply flex flex-col items-center justify-center rounded-2xl border-2 border-zinc-200 bg-white px-6 py-12 text-center sm:px-8 sm:py-20 dark:border-zinc-800 dark:bg-zinc-900;
 }
 
 .rest-day-icon {
-  @apply text-5xl;
+  @apply text-6xl;
 }
 
 .rest-day-title {
-  @apply mt-4 text-2xl font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply mt-5 text-2xl font-bold text-zinc-900 sm:text-3xl dark:text-zinc-50;
 }
 
 .rest-day-subtitle {
-  @apply mt-2 text-base text-zinc-500 dark:text-zinc-400;
+  @apply mt-3 text-base text-zinc-500 sm:text-lg dark:text-zinc-400;
 }

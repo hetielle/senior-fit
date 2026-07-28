@@ -60,6 +60,8 @@ export function ExerciseList({ items }: { items: Item[] }) {
     },
   });
 
+  const allDone = items.length > 0 && completedIds.size === items.length;
+
   return (
     <div className="exercise-list">
       <div className="exercise-progress">
@@ -73,6 +75,17 @@ export function ExerciseList({ items }: { items: Item[] }) {
           />
         </div>
       </div>
+
+      {allDone && (
+        <div className="workout-complete-banner">
+          <span className="workout-complete-icon">🎉</span>
+          <div>
+            <p className="workout-complete-title">Treino concluído!</p>
+            <p className="workout-complete-subtitle">Parabéns! Você completou todos os exercícios de hoje.</p>
+          </div>
+        </div>
+      )}
+
       {items.map((item) => {
         const done = completedIds.has(item.id);
         const loading = pendingId === item.id;
@@ -109,9 +122,9 @@ export function ExerciseList({ items }: { items: Item[] }) {
                   className={`check-btn ${done ? "check-btn-done" : ""} ${loading ? "check-btn-loading" : ""}`}
                   onClick={() => toggle.mutate({ studentWorkoutItemId: item.id, date: today })}
                   disabled={loading}
-                  aria-label={done ? "Desmarcar" : "Marcar como feito"}
+                  aria-label={done ? "Desmarcar exercício" : "Marcar exercício como feito"}
                 >
-                  {loading ? "·" : done ? "✓" : "○"}
+                  {loading ? "·" : done ? "✓" : "Feito?"}
                 </button>
               </div>
             </div>

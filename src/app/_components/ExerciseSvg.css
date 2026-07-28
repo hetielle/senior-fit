@@ -10,6 +10,13 @@
   .exercise-svg { --esvg-color: #a1a1aa; } /* zinc-400 */
 }
 
+/* Pause all animations when the user has requested reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .exercise-svg * {
+    animation: none !important;
+  }
+}
+
 /* ── Push-Up ─────────────────────────────────────────────────── */
 @keyframes pushup {
   0%, 100% { transform: translateY(0); }

@@ -5,21 +5,21 @@
 }
 
 .schedule-main {
-  @apply mx-auto max-w-2xl px-6 py-10;
+  @apply mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10;
 }
 
 .schedule-title {
-  @apply mb-6 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50;
+  @apply mb-6 text-3xl font-bold tracking-tight text-zinc-900 sm:mb-8 sm:text-4xl dark:text-zinc-50;
 }
 
 .week-list {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-4;
 }
 
 /* Day card */
 
 .day-card {
-  @apply rounded-2xl border border-zinc-200 bg-white px-5 py-4 dark:border-zinc-800 dark:bg-zinc-900;
+  @apply rounded-2xl border-2 border-zinc-200 bg-white px-4 py-4 sm:px-6 sm:py-5 dark:border-zinc-800 dark:bg-zinc-900;
 }
 
 .day-card-today {
@@ -27,35 +27,35 @@
 }
 
 .day-card-done {
-  @apply border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/40;
+  @apply border-green-300 bg-green-50 dark:border-green-800 dark:bg-green-950/40;
 }
 
 .day-card-partial {
-  @apply border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/30;
+  @apply border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30;
 }
 
 .day-card-missed {
-  @apply border-red-200 bg-red-50 dark:border-red-900/60 dark:bg-red-950/30;
+  @apply border-red-300 bg-red-50 dark:border-red-800/60 dark:bg-red-950/30;
 }
 
 .day-card-header {
-  @apply flex items-center justify-between;
+  @apply flex flex-wrap items-center justify-between gap-y-1;
 }
 
 .day-label-row {
-  @apply flex items-center gap-2;
+  @apply flex flex-wrap items-center gap-2;
 }
 
 .day-label {
-  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply text-base font-bold text-zinc-900 sm:text-lg dark:text-zinc-50;
 }
 
 .today-badge {
-  @apply rounded-full bg-zinc-900 px-2 py-0.5 text-xs font-medium text-white dark:bg-zinc-100 dark:text-zinc-900;
+  @apply rounded-full bg-zinc-900 px-3 py-1 text-sm font-bold text-white dark:bg-zinc-100 dark:text-zinc-900;
 }
 
 .day-completion-badge {
-  @apply rounded-full px-2 py-0.5 text-xs font-medium;
+  @apply rounded-full px-3 py-1 text-sm font-bold;
 }
 
 .badge-done {
@@ -71,29 +71,21 @@
 }
 
 .day-workout-title {
-  @apply text-sm font-medium text-zinc-500 dark:text-zinc-400;
+  @apply mt-1 text-base font-medium text-zinc-500 dark:text-zinc-400;
 }
 
 .day-rest {
-  @apply text-sm text-zinc-400 dark:text-zinc-500;
-}
-
-.day-exercise-expandable {
-  @apply cursor-pointer select-none flex-col items-stretch;
+  @apply mt-1 text-base text-zinc-400 dark:text-zinc-500;
 }
 
 .day-exercise-item-row {
-  @apply flex w-full items-center justify-between py-2;
-}
-
-.day-exercise-chevron {
-  @apply text-xs text-zinc-400 dark:text-zinc-500;
+  @apply flex w-full flex-wrap items-center justify-between gap-2 py-3;
 }
 
 /* Exercise list inside a day */
 
 .day-exercise-list {
-  @apply mt-3 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
+  @apply mt-4 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800;
 }
 
 .day-exercise-item {
@@ -110,21 +102,26 @@
 }
 
 .day-exercise-name {
-  @apply flex flex-col text-sm text-zinc-700 dark:text-zinc-300;
+  @apply flex flex-col text-base font-medium text-zinc-700 dark:text-zinc-300;
 }
 
 .day-exercise-muscle {
-  @apply text-xs text-zinc-400 dark:text-zinc-500;
+  @apply text-sm text-zinc-400 dark:text-zinc-500;
 }
 
 .day-exercise-right {
-  @apply flex items-center gap-2;
+  @apply flex items-center gap-3;
 }
 
 .day-exercise-check {
-  @apply text-xs font-bold text-green-600 dark:text-green-400;
+  @apply text-sm font-bold text-green-600 dark:text-green-400;
 }
 
 .day-exercise-volume {
-  @apply shrink-0 text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply shrink-0 text-base font-bold text-zinc-900 dark:text-zinc-50;
+}
+
+.day-exercise-expand-btn {
+  @apply shrink-0 rounded-lg border border-zinc-300 px-3 py-2 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 active:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800;
+  min-height: 44px;
 }

@@ -17,8 +17,9 @@ export default async function SignUp() {
   return (
     <HydrateClient>
       <div className="page-wrapper">
-        <Image src={logo} alt="Logo" style={{ width: "30vw" }} />
+        <Image src={logo} alt="Logo" className="login-logo-side" />
         <main className="login-card">
+          <Image src={logo} alt="Logo" className="login-logo-top" />
           <h1 className="login-title">Cadastrar</h1>
           <p className="login-subtitle">
             Crie sua conta para começar a usar o SeniorFit.

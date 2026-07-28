@@ -1,41 +1,54 @@
 @reference "./globals.css";
 
+.login-logo-side {
+  @apply hidden sm:block;
+  width: 30vw;
+  max-width: 260px;
+  height: auto;
+}
+
+.login-logo-top {
+  @apply mb-6 block sm:hidden;
+  width: 160px;
+  height: auto;
+}
+
 .page-wrapper {
   @apply flex flex-1 items-center justify-center bg-zinc-50 dark:bg-black;
-  height: 100vh;
+  min-height: 100svh;
 }
 
 .login-card {
-  @apply w-full max-w-sm rounded-2xl bg-white px-8 py-10 shadow-sm dark:bg-zinc-900;
-  width: 50%;
+  @apply w-full rounded-2xl bg-white px-6 py-10 shadow-sm sm:max-w-lg sm:px-10 sm:py-12 dark:bg-zinc-900;
+  margin: 1rem;
 }
 
 .login-title {
-  @apply mb-1 text-4xl font-semibold tracking-tight text-black dark:text-zinc-50;
+  @apply mb-2 text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-zinc-50;
 }
 
 .login-subtitle {
-  @apply mb-8 text-base text-zinc-500 dark:text-zinc-400;
+  @apply mb-8 text-lg text-zinc-500 sm:text-xl dark:text-zinc-400;
 }
 
 .form {
-  @apply flex flex-col gap-5;
+  @apply flex flex-col gap-5 sm:gap-6;
 }
 
 .form-group {
-  @apply flex flex-col gap-1.5;
+  @apply flex flex-col gap-2;
 }
 
 .form-label {
-  @apply text-base font-medium text-zinc-700 dark:text-zinc-300;
+  @apply text-base font-semibold text-zinc-700 sm:text-lg dark:text-zinc-300;
 }
 
 .form-input {
-  @apply h-10 rounded-lg border border-zinc-200 bg-white px-3 text-base text-zinc-900 transition outline-none placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 focus:ring-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-500 dark:focus:ring-zinc-800;
+  @apply h-14 rounded-xl border-2 border-zinc-200 bg-white px-4 text-base text-zinc-900 transition outline-none placeholder:text-zinc-400 focus:border-zinc-500 focus:ring-2 focus:ring-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-400 dark:focus:ring-zinc-800;
 }
 
 .btn-primary {
-  @apply mt-1 h-10 w-full rounded-lg bg-zinc-900 text-base font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200;
+  @apply mt-2 h-14 w-full rounded-xl bg-zinc-900 text-lg font-bold text-white transition hover:bg-zinc-700 active:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200;
 }
 
 .divider {
@@ -46,32 +59,44 @@
   }
 
   .divider-text {
-    @apply text-sm text-zinc-400 dark:text-zinc-500;
+    @apply text-base text-zinc-400 dark:text-zinc-500;
   }
 }
 
 .btn-social {
-  @apply h-10 w-full rounded-lg border border-zinc-200 bg-white text-base font-medium text-zinc-900 transition hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700;
+  @apply h-14 w-full rounded-xl border-2 border-zinc-200 bg-white text-base font-semibold text-zinc-900 transition hover:bg-zinc-50 active:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700;
 }
 
 .signup-prompt {
-  @apply mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400;
+  @apply mt-6 text-center text-base text-zinc-500 dark:text-zinc-400;
 
   a {
-    @apply font-medium text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50;
+    @apply font-bold text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50;
   }
 }
 
 .form-error {
-  @apply rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950 dark:text-red-400;
+  @apply rounded-xl bg-red-50 px-4 py-3 text-base font-medium text-red-600 dark:bg-red-950 dark:text-red-400;
+}
+
+.password-wrapper {
+  @apply relative flex items-center;
+}
+
+.password-input {
+  @apply w-full pr-24;
+}
+
+.password-toggle {
+  @apply absolute right-3 text-sm font-semibold text-zinc-500 transition hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200;
 }
 
 .role-options {
-  @apply flex gap-3;
+  @apply flex flex-col gap-3 sm:flex-row;
 }
 
 .role-option {
-  @apply flex flex-1 cursor-pointer flex-col gap-0.5 rounded-lg border border-zinc-200 px-4 py-3 transition hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500;
+  @apply flex flex-1 cursor-pointer flex-col gap-1 rounded-xl border-2 border-zinc-200 px-5 py-4 transition hover:border-zinc-400 active:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-500;
 
   input[type="radio"] {
     @apply sr-only;
@@ -83,9 +108,9 @@
 }
 
 .role-option-label {
-  @apply text-sm font-semibold text-zinc-900 dark:text-zinc-50;
+  @apply text-base font-bold text-zinc-900 dark:text-zinc-50;
 }
 
 .role-option-desc {
-  @apply text-xs text-zinc-500 dark:text-zinc-400;
+  @apply text-sm text-zinc-500 dark:text-zinc-400;
 }

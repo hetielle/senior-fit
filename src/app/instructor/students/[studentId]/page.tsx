@@ -75,6 +75,7 @@ export default async function StudentDetail({ params }: Props) {
       <AppHeader activePath="/instructor/students" />
 
       <main className="student-detail-main">
+        <a href="/instructor/students" className="back-link">← Voltar para alunos</a>
         {/* Student info */}
         <div className="student-info-card">
           <h1 className="student-detail-name">{student.name}</h1>
