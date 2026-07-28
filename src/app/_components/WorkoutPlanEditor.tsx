@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { api } from "pnpm/trpc/react";
 
-type Exercise = { id: string; name: string; muscleGroup: string };
+type Exercise = { id: string; name: string; muscleGroup: string; description: string | null };
 
 type Item = {
   id: string;
@@ -56,6 +56,25 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
   const [itemDuration, setItemDuration] = useState("");
 
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
+
+  // Custom exercise creation
+  const [creatingExercise, setCreatingExercise] = useState(false);
+  const [customName, setCustomName] = useState("");
+  const [customMuscle, setCustomMuscle] = useState("");
+  const [customDesc, setCustomDesc] = useState("");
+  const [localExercises, setLocalExercises] = useState<Exercise[]>([]);
+
+  const createExercise = api.exercise.create.useMutation({
+    onSuccess: (ex) => {
+      const newEx = { ...ex, description: ex.description ?? null };
+      setLocalExercises((prev) => [...prev, newEx]);
+      setSelectedExerciseId(ex.id);
+      setCreatingExercise(false);
+      setCustomName("");
+      setCustomMuscle("");
+      setCustomDesc("");
+    },
+  });
 
   const upsert = api.studentWorkout.upsertStudentWorkout.useMutation({
     onSuccess: (data) => {
@@ -124,6 +143,7 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
     setAddingExercise(false);
     setEditingTitle(false);
     setEditingItemId(null);
+    setCreatingExercise(false);
   }
 
   function handleCreateWorkout() {
@@ -309,55 +329,111 @@ export function WorkoutPlanEditor({ studentId, initialPlan, allExercises }: Prop
 
             {/* Add exercise row */}
             {addingExercise ? (
-              <div className="add-exercise-row">
-                <select
-                  className="editor-select"
-                  value={selectedExerciseId}
-                  onChange={(e) => setSelectedExerciseId(e.target.value)}
-                >
-                  {allExercises.map((ex) => (
-                    <option key={ex.id} value={ex.id}>
-                      {ex.name} — {ex.muscleGroup}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="number"
-                  className="editor-input-sm"
-                  placeholder="Séries"
-                  value={newSets}
-                  onChange={(e) => setNewSets(e.target.value)}
-                  min="1"
-                />
-                <input
-                  type="number"
-                  className="editor-input-sm"
-                  placeholder="Reps"
-                  value={newReps}
-                  onChange={(e) => setNewReps(e.target.value)}
-                  min="1"
-                />
-                <input
-                  type="number"
-                  className="editor-input-sm"
-                  placeholder="Duração (s)"
-                  value={newDuration}
-                  onChange={(e) => setNewDuration(e.target.value)}
-                  min="0"
-                />
-                <button
-                  className="btn-add-exercise"
-                  onClick={handleAddExercise}
-                  disabled={addItem.isPending || !selectedExerciseId}
-                >
-                  {addItem.isPending ? "Adicionando..." : "Adicionar"}
-                </button>
-                <button
-                  className="btn-done-exercise"
-                  onClick={() => setAddingExercise(false)}
-                >
-                  Concluído
-                </button>
+              <div className="add-exercise-section">
+                {/* Mode toggle */}
+                <div className="add-exercise-tabs">
+                  <button
+                    className={`add-exercise-tab${!creatingExercise ? " add-exercise-tab-active" : ""}`}
+                    onClick={() => setCreatingExercise(false)}
+                  >
+                    Existente
+                  </button>
+                  <button
+                    className={`add-exercise-tab${creatingExercise ? " add-exercise-tab-active" : ""}`}
+                    onClick={() => setCreatingExercise(true)}
+                  >
+                    + Novo exercício
+                  </button>
+                </div>
+
+                {creatingExercise ? (
+                  /* ── Create custom exercise form ── */
+                  <div className="add-exercise-row create-exercise-form">
+                    <input
+                      className="editor-input"
+                      placeholder="Nome do exercício"
+                      value={customName}
+                      onChange={(e) => setCustomName(e.target.value)}
+                    />
+                    <input
+                      className="editor-input-sm"
+                      placeholder="Grupo muscular"
+                      value={customMuscle}
+                      onChange={(e) => setCustomMuscle(e.target.value)}
+                    />
+                    <input
+                      className="editor-input"
+                      placeholder="Descrição (opcional)"
+                      value={customDesc}
+                      onChange={(e) => setCustomDesc(e.target.value)}
+                    />
+                    <button
+                      className="btn-add-exercise"
+                      disabled={createExercise.isPending || !customName.trim() || !customMuscle.trim()}
+                      onClick={() =>
+                        createExercise.mutate({
+                          name: customName.trim(),
+                          muscleGroup: customMuscle.trim(),
+                          description: customDesc.trim() || undefined,
+                        })
+                      }
+                    >
+                      {createExercise.isPending ? "Criando..." : "Criar"}
+                    </button>
+                    <button className="btn-done-exercise" onClick={() => setAddingExercise(false)}>
+                      Cancelar
+                    </button>
+                  </div>
+                ) : (
+                  /* ── Pick existing exercise ── */
+                  <div className="add-exercise-row">
+                    <select
+                      className="editor-select"
+                      value={selectedExerciseId}
+                      onChange={(e) => setSelectedExerciseId(e.target.value)}
+                    >
+                      {[...allExercises, ...localExercises].map((ex) => (
+                        <option key={ex.id} value={ex.id}>
+                          {ex.name} — {ex.muscleGroup}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="number"
+                      className="editor-input-sm"
+                      placeholder="Séries"
+                      value={newSets}
+                      onChange={(e) => setNewSets(e.target.value)}
+                      min="1"
+                    />
+                    <input
+                      type="number"
+                      className="editor-input-sm"
+                      placeholder="Reps"
+                      value={newReps}
+                      onChange={(e) => setNewReps(e.target.value)}
+                      min="1"
+                    />
+                    <input
+                      type="number"
+                      className="editor-input-sm"
+                      placeholder="Duração (s)"
+                      value={newDuration}
+                      onChange={(e) => setNewDuration(e.target.value)}
+                      min="0"
+                    />
+                    <button
+                      className="btn-add-exercise"
+                      onClick={handleAddExercise}
+                      disabled={addItem.isPending || !selectedExerciseId}
+                    >
+                      {addItem.isPending ? "Adicionando..." : "Adicionar"}
+                    </button>
+                    <button className="btn-done-exercise" onClick={() => setAddingExercise(false)}>
+                      Concluído
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="add-exercise-row">

@@ -35,6 +35,8 @@ model Exercise {
   sets         Int?
   reps         Int?
   durationSecs Int?
+  creatorId    String?
+  creator      User?                @relation("CreatedExercises", fields: [creatorId], references: [id])
   items        WorkoutItem[]
   studentItems StudentWorkoutItem[]
 }
@@ -141,6 +143,7 @@ model User {
   studentWorkouts     StudentWorkout[]     @relation("StudentWorkouts")
   assignedWorkouts    StudentWorkout[]     @relation("InstructorAssignments")
   exerciseCompletions ExerciseCompletion[]
+  createdExercises    Exercise[]           @relation("CreatedExercises")
 
   @@unique([email])
   @@map("user")

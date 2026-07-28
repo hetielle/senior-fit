@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { api } from "pnpm/trpc/react";
-
+import { ExerciseSvg } from "./ExerciseSvg";
 
 type Exercise = {
   name: string;
@@ -48,7 +48,6 @@ export function ExerciseList({ items }: { items: Item[] }) {
     },
     onSettled: () => setPendingId(null),
     onError: (_err, { studentWorkoutItemId }) => {
-      // revert on error
       setCompletedIds((prev) => {
         const next = new Set(prev);
         if (next.has(studentWorkoutItemId)) {
@@ -82,6 +81,7 @@ export function ExerciseList({ items }: { items: Item[] }) {
             key={item.id}
             className={`exercise-card ${done ? "exercise-card-done" : ""}`}
           >
+            <ExerciseSvg exerciseName={item.exercise.name} />
             <div className="exercise-card-top">
               <div>
                 <h3 className="exercise-name">{item.exercise.name}</h3>
@@ -107,12 +107,7 @@ export function ExerciseList({ items }: { items: Item[] }) {
                 </div>
                 <button
                   className={`check-btn ${done ? "check-btn-done" : ""} ${loading ? "check-btn-loading" : ""}`}
-                  onClick={() =>
-                    toggle.mutate({
-                      studentWorkoutItemId: item.id,
-                      date: today,
-                    })
-                  }
+                  onClick={() => toggle.mutate({ studentWorkoutItemId: item.id, date: today })}
                   disabled={loading}
                   aria-label={done ? "Desmarcar" : "Marcar como feito"}
                 >

@@ -136,7 +136,8 @@ exports.Prisma.ExerciseScalarFieldEnum = {
   muscleGroup: 'muscleGroup',
   sets: 'sets',
   reps: 'reps',
-  durationSecs: 'durationSecs'
+  durationSecs: 'durationSecs',
+  creatorId: 'creatorId'
 };
 
 exports.Prisma.WorkoutScalarFieldEnum = {

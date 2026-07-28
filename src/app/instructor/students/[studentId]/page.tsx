@@ -3,6 +3,7 @@ import { db } from "pnpm/server/db";
 import { requireInstructor } from "pnpm/server/better-auth/guards";
 import { WorkoutPlanEditor } from "../../../_components/WorkoutPlanEditor";
 import { AppHeader } from "../../../_components/AppHeader";
+import { ActivityHistory } from "../../../_components/ActivityHistory";
 import "./page.css";
 
 type Props = { params: Promise<{ studentId: string }> };
@@ -191,35 +192,10 @@ export default async function StudentDetail({ params }: Props) {
         {/* Activity history */}
         <div className="student-info-card">
           <h2 className="weight-history-title" style={{ marginBottom: 0 }}>Histórico de Atividades</h2>
-          {completionDates.length === 0 ? (
-            <p className="activity-empty">Nenhum treino realizado ainda.</p>
-          ) : (
-            <ul className="activity-list">
-              {completionDates.map((dateKey) => {
-                const items = completionsByDate[dateKey]!;
-                const date = new Date(dateKey + "T12:00:00");
-                return (
-                  <li key={dateKey} className="activity-day">
-                    <span className="activity-date">
-                      {date.toLocaleDateString("pt-BR")}
-                    </span>
-                    <ul className="activity-exercises">
-                      {items.map((c) => (
-                        <li key={c.id} className="activity-exercise">
-                          <span className="activity-exercise-name">
-                            {c.studentWorkoutItem.exercise.name}
-                          </span>
-                          <span className="activity-exercise-workout">
-                            {c.studentWorkoutItem.studentWorkout.title}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          <ActivityHistory
+            completionsByDate={completionsByDate}
+            completionDates={completionDates}
+          />
         </div>
 
         {/* Workout plan editor */}

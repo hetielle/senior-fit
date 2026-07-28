@@ -1,6 +1,7 @@
 import { db } from "pnpm/server/db";
 import { requireStudent } from "pnpm/server/better-auth/guards";
 import { AppHeader } from "../_components/AppHeader";
+import { ScheduleExerciseList } from "../_components/ScheduleExerciseList";
 import "./page.css";
 
 const WEEK: { dayOfWeek: number; label: string }[] = [
@@ -76,7 +77,9 @@ export default async function Schedule() {
             const isFuture = dayDate > now && !isToday;
 
             const dayCompletions = weekCompletions.filter(
-              (c) => c.date.toDateString() === dayDate.toDateString(),
+              (c) =>
+                c.date.toISOString().split("T")[0] ===
+                dayDate.toISOString().split("T")[0],
             );
             const completedCount = dayCompletions.length;
             const totalCount = workout?.items.length ?? 0;
@@ -114,33 +117,10 @@ export default async function Schedule() {
                 </div>
 
                 {workout && (
-                  <ul className="day-exercise-list">
-                    {workout.items.map((item) => {
-                      const done = dayCompletions.some(
-                        (c) => c.studentWorkoutItemId === item.id,
-                      );
-                      return (
-                        <li key={item.id} className={`day-exercise-item ${done ? "day-exercise-done" : ""}`}>
-                          <div className="day-exercise-name">
-                            {item.exercise.name}
-                            <span className="day-exercise-muscle">
-                              {item.exercise.muscleGroup}
-                            </span>
-                          </div>
-                          <div className="day-exercise-right">
-                            {done && <span className="day-exercise-check">✓</span>}
-                            <span className="day-exercise-volume">
-                              {item.durationSecs
-                                ? `${item.sets}× ${item.durationSecs}s`
-                                : item.reps
-                                ? `${item.sets}×${item.reps}`
-                                : `${item.sets} séries`}
-                            </span>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <ScheduleExerciseList
+                    items={workout.items}
+                    completedIds={new Set(dayCompletions.map((c) => c.studentWorkoutItemId))}
+                  />
                 )}
               </div>
             );
