@@ -1,0 +1,238 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram name="SeniorFit - Fluxo tRPC" id="trpc-flow-diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="SeniorFit — Fluxo de Dados: Requisição tRPC e Ciclo de Vida" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="20" width="1400" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===== MAIN tRPC FLOW ===== -->
+        <mxCell id="flow-header" value="Ciclo Completo de uma Chamada tRPC (ex: toggleCompletion)" style="text;html=1;strokeColor=#d79b00;fillColor=#ffe6cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="1560" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane: Browser -->
+        <mxCell id="lane-browser" value="Browser" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="110" width="310" height="520" as="geometry" />
+        </mxCell>
+        <!-- Swimlane: tRPC Client -->
+        <mxCell id="lane-trpc-client" value="tRPC Client + TanStack Query" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="110" width="310" height="520" as="geometry" />
+        </mxCell>
+        <!-- Swimlane: Next.js Handler -->
+        <mxCell id="lane-nextjs" value="Next.js Handler /api/trpc" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="110" width="310" height="520" as="geometry" />
+        </mxCell>
+        <!-- Swimlane: tRPC Middleware -->
+        <mxCell id="lane-middleware" value="Middleware tRPC" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="110" width="310" height="520" as="geometry" />
+        </mxCell>
+        <!-- Swimlane: Prisma + DB -->
+        <mxCell id="lane-db" value="Prisma + PostgreSQL" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="110" width="240" height="520" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1: User action -->
+        <mxCell id="s1-action" value="Usuário toca 'Feito?'&#xa;em um exercício" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="160" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2: useMutation call -->
+        <mxCell id="s2-mutation" value="trpc.studentWorkout&#xa;.toggleCompletion&#xa;.useMutation().mutate({&#xa;  studentWorkoutItemId,&#xa;  date: hoje&#xa;})" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="150" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Step 3: Serialize + HTTP POST -->
+        <mxCell id="s3-serialize" value="SuperJSON serializa input&#xa;POST /api/trpc/&#xa;studentWorkout.toggleCompletion&#xa;Body: { json: { id, date } }" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="270" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Step 4: Route handler -->
+        <mxCell id="s4-handler" value="Route handler recebe&#xa;Identifica procedure:&#xa;studentWorkout.toggleCompletion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="710" y="160" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Step 5: createTRPCContext -->
+        <mxCell id="s5-context" value="createTRPCContext()&#xa;Injeta: db, session, headers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="710" y="260" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Step 6: Middleware chain -->
+        <mxCell id="s6-timing" value="1. Timing Middleware&#xa;Registra início" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="160" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s7-auth" value="2. Auth Middleware&#xa;getSession() verifica cookie&#xa;Sem sessão → UNAUTHORIZED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="230" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s8-role" value="3. Role Middleware (se instructorProcedure)&#xa;role ≠ INSTRUCTOR → FORBIDDEN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="310" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s9-zod" value="4. Zod Validation&#xa;Valida schema do input&#xa;Inválido → BAD_REQUEST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="390" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Step 10: Procedure handler -->
+        <mxCell id="s10-procedure" value="5. Procedure Handler&#xa;Lógica de negócio&#xa;Acessa ctx.db e ctx.session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="710" y="360" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Step 11: Prisma query -->
+        <mxCell id="s11-prisma" value="Prisma: UPSERT&#xa;ExerciseCompletion&#xa;(cria ou deleta)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="160" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Step 12: SQL -->
+        <mxCell id="s12-sql" value="PostgreSQL executa&#xa;INSERT/DELETE&#xa;Aplica UNIQUE constraint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="260" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Step 13: Response -->
+        <mxCell id="s13-response" value="Resultado serializado&#xa;com SuperJSON&#xa;HTTP 200 + JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="710" y="460" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Step 14: TanStack Query receives -->
+        <mxCell id="s14-tanstack" value="TanStack Query recebe&#xa;Desserializa com SuperJSON&#xa;Atualiza cache&#xa;Invalida: getToday, getWeek" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="380" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Step 15: React re-render -->
+        <mxCell id="s15-render" value="React re-renderiza&#xa;ExerciseList:&#xa;- Botão → '✓'&#xa;- Barra de progresso&#xa;- Banner celebração" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="360" width="200" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arr1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s1-action" target="s2-mutation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s2-mutation" target="s3-serialize">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr3" value="HTTP POST" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="s3-serialize" target="s4-handler">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s4-handler" target="s5-context">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s5-context" target="s6-timing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s6-timing" target="s7-auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr7" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s7-auth" target="s8-role">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s8-role" target="s9-zod">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s9-zod" target="s10-procedure">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s10-procedure" target="s11-prisma">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s11-prisma" target="s12-sql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr12" value="Resultado" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s12-sql" target="s13-response">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1455" y="380" />
+              <mxPoint x="820" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr13" value="HTTP 200" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="s13-response" target="s14-tanstack">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr14" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="s14-tanstack" target="s15-render">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Error paths -->
+        <mxCell id="err-unauth" value="TRPCError&#xa;UNAUTHORIZED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="490" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="err-forbidden" value="TRPCError&#xa;FORBIDDEN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1185" y="490" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-err1" value="Sem sessão" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" edge="1" parent="1" source="s7-auth" target="err-unauth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-err2" value="Role errado" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" edge="1" parent="1" source="s8-role" target="err-forbidden">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== TANSTACK QUERY LIFECYCLE ===== -->
+        <mxCell id="lifecycle-header" value="Ciclo de Vida do Estado: TanStack Query" style="text;html=1;strokeColor=#d79b00;fillColor=#ffe6cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="660" width="1560" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- State lifecycle boxes -->
+        <mxCell id="lc-initial" value="Carregamento inicial&#xa;useQuery() executado&#xa;→ Cache populado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="710" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-navigate" value="Navegação (outra página)&#xa;Dados 'fresh'?&#xa;→ Exibe imediato&#xa;Dados 'stale'?&#xa;→ Exibe + refetch bg" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="270" y="710" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-mutation-success" value="Mutação executada&#xa;onSuccess callback:&#xa;queryClient.invalidateQueries()&#xa;→ Refetch automático&#xa;→ Re-render" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="510" y="710" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-mutation-error" value="Mutação falhou&#xa;isError = true&#xa;Mensagem de erro&#xa;Estado anterior mantido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="750" y="710" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-server-invalidation" value="Queries invalidadas:&#xa;getToday, getWeek&#xa;Marcadas como stale&#xa;→ Refetch na próxima&#xa;   visualização" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="990" y="710" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Lifecycle arrows -->
+        <mxCell id="lc-arr1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="lc-initial" target="lc-navigate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-arr2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="lc-navigate" target="lc-mutation-success">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-arr3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="lc-mutation-success" target="lc-server-invalidation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lc-arr4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" edge="1" parent="1" source="lc-mutation-error" target="lc-mutation-success">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PROCEDURES TABLE ===== -->
+        <mxCell id="proc-header" value="Referência: Procedures tRPC por Tipo de Proteção" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="840" width="1560" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Public procedures -->
+        <mxCell id="proc-public" value="publicProcedure&#xa;(sem restrição)" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="890" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-public-list" value="(nenhuma no projeto atual)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;" vertex="1" parent="proc-public">
+          <mxGeometry x="10" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Protected procedures -->
+        <mxCell id="proc-protected" value="protectedProcedure&#xa;(sessão válida)" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="890" width="520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-protected-list" value="profile.get / profile.upsert / profile.addWeight&#xa;studentWorkout.getToday / getWeek / toggleCompletion&#xa;workout.getToday" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="proc-protected">
+          <mxGeometry x="10" y="35" width="500" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Instructor procedures -->
+        <mxCell id="proc-instructor" value="instructorProcedure&#xa;(role = INSTRUCTOR)" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="890" width="790" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="proc-instructor-list" value="exercise.create&#xa;studentWorkout.getStudentWeek / upsertStudentWorkout / addItem / removeItem / updateItem / deleteStudentWorkout&#xa;instructor.getStudents / getStudent / toggleStudentActive / getStudentMetrics" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="proc-instructor">
+          <mxGeometry x="10" y="35" width="770" height="75" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

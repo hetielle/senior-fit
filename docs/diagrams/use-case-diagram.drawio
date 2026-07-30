@@ -1,0 +1,222 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram name="SeniorFit - Casos de Uso" id="use-case-diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="SeniorFit — Diagrama de Casos de Uso" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- System Boundary -->
+        <mxCell id="system-boundary" value="Sistema SeniorFit" style="swimlane;startSize=30;fillColor=none;strokeColor=#000000;fontStyle=1;fontSize=14;dashed=0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="80" width="1100" height="980" as="geometry" />
+        </mxCell>
+
+        <!-- Use Cases - Authentication (shared) -->
+        <mxCell id="uc-group-auth" value="Autenticação" style="swimlane;startSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="system-boundary">
+          <mxGeometry x="330" y="50" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="uc01" value="UC01&#xa;Criar Conta" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="uc-group-auth">
+          <mxGeometry x="20" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc02" value="UC02&#xa;Fazer Login" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="uc-group-auth">
+          <mxGeometry x="160" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc03" value="UC03&#xa;Fazer Logout" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="uc-group-auth">
+          <mxGeometry x="300" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Use Cases - Student -->
+        <mxCell id="uc-group-student" value="Funcionalidades do Aluno" style="swimlane;startSize=20;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="system-boundary">
+          <mxGeometry x="80" y="230" width="760" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="uc04" value="UC04&#xa;Ver Treino do Dia" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="20" y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc05" value="UC05&#xa;Marcar Exercício&#xa;como Concluído" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="200" y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc06" value="UC06&#xa;Ver Agenda&#xa;Semanal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="380" y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc07" value="UC07&#xa;Editar Perfil" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="560" y="50" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc08" value="UC08&#xa;Registrar Peso" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="300" y="170" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Student notes -->
+        <mxCell id="note-uc04" value="Exibe exercícios do dia&#xa;com ícones SVG, séries/reps" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="20" y="170" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="note-uc05" value="Toggle ExerciseCompletion&#xa;Barra de progresso&#xa;Banner celebração" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="200" y="170" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="note-uc06" value="7 dias, status:&#xa;Concluído/Parcial&#xa;Descanso/Não realizado" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="480" y="170" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="note-uc08" value="Histórico de peso&#xa;Indicador ↑↓ baseado&#xa;no objetivo do aluno" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-student">
+          <mxGeometry x="480" y="270" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Use Cases - Instructor -->
+        <mxCell id="uc-group-instructor" value="Funcionalidades do Instrutor" style="swimlane;startSize=20;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="system-boundary">
+          <mxGeometry x="80" y="680" width="960" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="uc09" value="UC09&#xa;Ver Lista de&#xa;Alunos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="20" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc10" value="UC10&#xa;Ativar/Desativar&#xa;Aluno" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="175" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc11" value="UC11&#xa;Ver Dados e&#xa;Métricas do Aluno" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="330" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc12" value="UC12&#xa;Criar Plano de&#xa;Treino" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="485" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc13" value="UC13&#xa;Editar Plano de&#xa;Treino" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="640" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc14" value="UC14&#xa;Criar Exercício&#xa;Personalizado" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="795" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Instructor notes -->
+        <mxCell id="note-uc10" value="Controla isActive&#xa;Bloqueia próximo login" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="140" y="160" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="note-uc11" value="Aderência 7d/30d&#xa;Streak, sessões&#xa;Grupo muscular&#xa;Tendência de peso" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="300" y="160" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="note-uc13" value="Adicionar/Remover&#xa;Reordenar exercícios&#xa;Excluir plano" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=9;" vertex="1" parent="uc-group-instructor">
+          <mxGeometry x="600" y="160" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Actors -->
+        <!-- Student Actor -->
+        <mxCell id="actor-student" value="Aluno&#xa;(role = STUDENT)" style="shape=mxgraph.basic.person;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="350" width="80" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Instructor Actor -->
+        <mxCell id="actor-instructor" value="Instrutor&#xa;(role = INSTRUCTOR)" style="shape=mxgraph.basic.person;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="50" y="780" width="80" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Better Auth Sub-system -->
+        <mxCell id="better-auth-box" value="«subsistema»&#xa;Better Auth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="system-boundary">
+          <mxGeometry x="850" y="50" width="180" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ba-note" value="Gerencia:&#xa;Sessões (cookie httpOnly)&#xa;Hash de senhas (bcrypt)&#xa;OAuth (Account)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="system-boundary">
+          <mxGeometry x="855" y="90" width="170" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Connections: Student -> UC01 -->
+        <mxCell id="conn-student-uc01" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC02 -->
+        <mxCell id="conn-student-uc02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC03 -->
+        <mxCell id="conn-student-uc03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC04 -->
+        <mxCell id="conn-student-uc04" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc04">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC05 -->
+        <mxCell id="conn-student-uc05" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc05">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC06 -->
+        <mxCell id="conn-student-uc06" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc06">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC07 -->
+        <mxCell id="conn-student-uc07" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Student -> UC08 -->
+        <mxCell id="conn-student-uc08" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" parent="1" source="actor-student" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Instructor -> UC02 -->
+        <mxCell id="conn-instructor-uc02" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC03 -->
+        <mxCell id="conn-instructor-uc03" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC09 -->
+        <mxCell id="conn-instructor-uc09" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC10 -->
+        <mxCell id="conn-instructor-uc10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC11 -->
+        <mxCell id="conn-instructor-uc11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC12 -->
+        <mxCell id="conn-instructor-uc12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC13 -->
+        <mxCell id="conn-instructor-uc13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Instructor -> UC14 -->
+        <mxCell id="conn-instructor-uc14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#b85450;" edge="1" parent="1" source="actor-instructor" target="uc14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- UC01/UC02/UC03 -> Better Auth -->
+        <mxCell id="conn-uc01-auth" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#9673a6;" edge="1" parent="system-boundary" source="uc01" target="better-auth-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conn-uc02-auth" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#9673a6;" edge="1" parent="system-boundary" source="uc02" target="better-auth-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conn-uc03-auth" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#9673a6;" edge="1" parent="system-boundary" source="uc03" target="better-auth-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Include relationships -->
+        <mxCell id="conn-uc07-uc08" value="«include»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" parent="system-boundary" source="uc07" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conn-uc12-uc13" value="«extend»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" parent="system-boundary" source="uc12" target="uc13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conn-uc13-uc14" value="«include»" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" parent="system-boundary" source="uc13" target="uc14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Pre-condition note for UC01 -->
+        <mxCell id="note-inactive" value="Nota: Após UC01,&#xa;isActive = false.&#xa;Aluno aguarda&#xa;ativação pelo instrutor (UC10)." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="170" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="conn-note-uc10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;strokeColor=#d79b00;" edge="1" parent="1" source="note-inactive" target="uc10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Route protection labels -->
+        <mxCell id="label-guards" value="Proteção de Rotas:&#xa;Aluno → requireStudent()&#xa;Instrutor → requireInstructor()&#xa;Redirect no servidor (sem flash)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="300" width="200" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

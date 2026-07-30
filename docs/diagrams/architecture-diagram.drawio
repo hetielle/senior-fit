@@ -1,0 +1,247 @@
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram name="SeniorFit - Arquitetura de Componentes" id="architecture-diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="SeniorFit — Arquitetura de Componentes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Browser/Client Layer -->
+        <mxCell id="browser-group" value="BROWSER / CLIENTE" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="1580" height="310" as="geometry" />
+        </mxCell>
+
+        <!-- Server Components box -->
+        <mxCell id="server-components-box" value="Server Components (RSC)" style="swimlane;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="browser-group">
+          <mxGeometry x="20" y="50" width="360" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="sc-layout" value="layout.tsx&#xa;Root Layout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="server-components-box">
+          <mxGeometry x="20" y="35" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sc-pages" value="page.tsx (cada rota)&#xa;Server Component" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="server-components-box">
+          <mxGeometry x="190" y="35" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sc-guards" value="requireAuth()&#xa;requireStudent()&#xa;requireInstructor()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="server-components-box">
+          <mxGeometry x="20" y="100" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sc-trpc-server" value="trpc/server.ts&#xa;Caller direto ao DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="server-components-box">
+          <mxGeometry x="190" y="100" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sc-note" value="HTML pré-renderizado&#xa;enviado ao browser" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=2;fontSize=10;" vertex="1" parent="server-components-box">
+          <mxGeometry x="20" y="185" width="320" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Client Components box -->
+        <mxCell id="client-components-box" value="Client Components (&#34;use client&#34;)" style="swimlane;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="browser-group">
+          <mxGeometry x="420" y="50" width="680" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-forms" value="LoginForm&#xa;SignUpForm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="20" y="35" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-header" value="AppHeader&#xa;LogoutButton" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="160" y="35" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-workout" value="ExerciseList&#xa;ExerciseSvg" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="300" y="35" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-schedule" value="ScheduleExerciseList" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="440" y="35" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-instructor" value="WorkoutPlanEditor&#xa;StudentMetrics&#xa;ActivityHistory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="20" y="100" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-badges" value="StudentActiveBadge&#xa;StudentActiveToggle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="client-components-box">
+          <mxGeometry x="180" y="100" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-query" value="TanStack Query&#xa;useQuery / useMutation&#xa;Cache Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="client-components-box">
+          <mxGeometry x="340" y="100" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-authclient" value="authClient&#xa;signIn / signUp / signOut" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="client-components-box">
+          <mxGeometry x="520" y="100" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cc-trpc-react" value="trpc/react.tsx&#xa;TRPCReactProvider&#xa;tRPC Hooks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="client-components-box">
+          <mxGeometry x="340" y="180" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Tailwind CSS -->
+        <mxCell id="tailwind-box" value="Tailwind CSS / Estilos" style="swimlane;startSize=25;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="browser-group">
+          <mxGeometry x="1140" y="50" width="200" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="tailwind-note" value="Utility-first CSS&#xa;Responsivo&#xa;Acessível para idosos&#xa;(contraste, tamanhos)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="tailwind-box">
+          <mxGeometry x="10" y="35" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nextloader" value="NextToploader&#xa;Barra de progresso" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="tailwind-box">
+          <mxGeometry x="20" y="140" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows: HTTP -->
+        <mxCell id="arrow-browser-server" value="HTTP Requests&#xa;(navegação + API)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=#0050ef;" edge="1" parent="1" source="browser-group" target="nextjs-group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Next.js Server Layer -->
+        <mxCell id="nextjs-group" value="SERVIDOR NEXT.JS (Processo Node.js)" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="430" width="1580" height="420" as="geometry" />
+        </mxCell>
+
+        <!-- App Router -->
+        <mxCell id="app-router-box" value="App Router / Next.js" style="swimlane;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="nextjs-group">
+          <mxGeometry x="20" y="50" width="300" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="route-login" value="/ (Login)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="35" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-signup" value="/sign-up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="app-router-box">
+          <mxGeometry x="160" y="35" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-workouts" value="/workouts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="85" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-schedule" value="/schedule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="app-router-box">
+          <mxGeometry x="160" y="85" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-profile" value="/profile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="135" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-students" value="/instructor/students" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="app-router-box">
+          <mxGeometry x="160" y="135" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-student-id" value="/instructor/students/[id]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="185" width="260" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="route-auth-api" value="/api/auth/[...all]&#xa;Better Auth Handler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="235" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="route-trpc-api" value="/api/trpc/[trpc]&#xa;tRPC Handler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="app-router-box">
+          <mxGeometry x="160" y="235" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="env-note" value="src/env.js&#xa;Zod env validation (build time)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="app-router-box">
+          <mxGeometry x="20" y="300" width="260" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- tRPC Layer -->
+        <mxCell id="trpc-box" value="tRPC API Layer (src/server/api/)" style="swimlane;startSize=25;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="nextjs-group">
+          <mxGeometry x="360" y="50" width="520" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="trpc-context" value="createTRPCContext()&#xa;Injeta: db, session, headers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="trpc-box">
+          <mxGeometry x="20" y="35" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="trpc-procedures" value="Procedures:&#xa;publicProcedure&#xa;protectedProcedure&#xa;instructorProcedure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="trpc-box">
+          <mxGeometry x="260" y="35" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="router-profile" value="profileRouter&#xa;get / upsert / addWeight" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="trpc-box">
+          <mxGeometry x="20" y="110" width="145" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="router-exercise" value="exerciseRouter&#xa;create" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="trpc-box">
+          <mxGeometry x="175" y="110" width="145" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="router-workout" value="workoutRouter&#xa;getToday" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="trpc-box">
+          <mxGeometry x="330" y="110" width="145" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="router-sw" value="studentWorkoutRouter&#xa;getToday / getWeek&#xa;toggleCompletion&#xa;upsert / addItem&#xa;removeItem / updateItem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="trpc-box">
+          <mxGeometry x="20" y="175" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="router-instructor" value="instructorRouter&#xa;getStudents&#xa;getStudent&#xa;toggleStudentActive&#xa;getStudentMetrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="trpc-box">
+          <mxGeometry x="235" y="175" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="trpc-middleware" value="Middleware Chain: Timing → Auth → Role → Zod → Handler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="trpc-box">
+          <mxGeometry x="20" y="280" width="480" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Better Auth Layer -->
+        <mxCell id="auth-box" value="Better Auth (src/server/better-auth/)" style="swimlane;startSize=25;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="nextjs-group">
+          <mxGeometry x="920" y="50" width="360" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-config" value="config.ts&#xa;betterAuth({...})&#xa;emailAndPassword: enabled&#xa;prismaAdapter(db)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="auth-box">
+          <mxGeometry x="20" y="35" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-fields" value="Campos customizados:&#xa;role: DEFAULT STUDENT&#xa;isActive: DEFAULT false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="auth-box">
+          <mxGeometry x="195" y="35" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-server" value="server.ts&#xa;getSession()&#xa;React cache() por request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="auth-box">
+          <mxGeometry x="20" y="135" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-guards" value="guards.ts&#xa;requireAuth()&#xa;requireStudent()&#xa;requireInstructor()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="auth-box">
+          <mxGeometry x="190" y="135" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-client" value="client.ts (Browser)&#xa;createAuthClient()&#xa;signIn / signUp / signOut" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="auth-box">
+          <mxGeometry x="20" y="220" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-bcrypt" value="Senhas: bcrypt hash&#xa;Sessões: httpOnly cookie + DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="auth-box">
+          <mxGeometry x="20" y="285" width="320" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Prisma Layer -->
+        <mxCell id="prisma-box" value="Prisma ORM (src/server/db.ts)" style="swimlane;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="nextjs-group">
+          <mxGeometry x="1320" y="50" width="240" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="prisma-client" value="Prisma Client&#xa;Singleton" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="prisma-box">
+          <mxGeometry x="20" y="35" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="prisma-models" value="Models:&#xa;User / UserProfile&#xa;WeightEntry&#xa;Exercise&#xa;StudentWorkout&#xa;StudentWorkoutItem&#xa;ExerciseCompletion&#xa;Session / Account" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;" vertex="1" parent="prisma-box">
+          <mxGeometry x="20" y="90" width="200" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="prisma-schema" value="prisma/schema.prisma&#xa;PostgreSQL provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="prisma-box">
+          <mxGeometry x="20" y="255" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: tRPC -> Prisma -->
+        <mxCell id="arrow-trpc-prisma" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="nextjs-group" source="trpc-box" target="prisma-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Arrow: Auth -> Prisma -->
+        <mxCell id="arrow-auth-prisma" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=2;strokeColor=#9673a6;" edge="1" parent="nextjs-group" source="auth-box" target="prisma-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PostgreSQL -->
+        <mxCell id="postgres-group" value="PostgreSQL (Docker Container)" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="20" y="900" width="1580" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="pg-tables" value="Tabelas: user, user_profile, weight_entry, exercise, student_workout, student_workout_item, exercise_completion, session, account, verification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="postgres-group">
+          <mxGeometry x="300" y="50" width="800" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pg-constraints" value="Constraints: UNIQUE, CASCADE DELETE, INDEX, FOREIGN KEYS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="postgres-group">
+          <mxGeometry x="300" y="110" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pg-port" value="Port: 5432&#xa;TCP/SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="postgres-group">
+          <mxGeometry x="50" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Prisma -> PostgreSQL -->
+        <mxCell id="arrow-prisma-pg" value="TCP / SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeWidth=3;strokeColor=#82b366;" edge="1" parent="1" source="prisma-box" target="postgres-group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Server -> Client labels -->
+        <mxCell id="label-html" value="HTML + Props&#xa;(Hidratação)" style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="680" y="385" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="label-trpc-call" value="JSON-RPC POST&#xa;/api/trpc/..." style="text;html=1;strokeColor=none;fillColor=#ffe6cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="860" y="385" width="120" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend-title" value="Legenda" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1075" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-student" value="Rotas do Aluno" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="130" y="1075" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-instructor" value="Rotas do Instrutor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="1075" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-auth" value="Autenticação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="410" y="1075" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-db" value="Banco de Dados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="550" y="1075" width="120" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
