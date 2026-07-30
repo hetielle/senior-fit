@@ -25,7 +25,16 @@ export function LoginForm() {
       return;
     }
 
-    const role = (result.data?.user as { role?: string })?.role ?? "STUDENT";
+    const user = result.data?.user as { role?: string; isActive?: boolean } | undefined;
+
+    if (user?.isActive === false) {
+      await authClient.signOut();
+      setError("Sua conta está inativa. Entre em contato com seu instrutor.");
+      setIsPending(false);
+      return;
+    }
+
+    const role = user?.role ?? "STUDENT";
     router.push(role === "INSTRUCTOR" ? "/instructor/students" : "/workouts");
   }
 

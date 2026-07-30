@@ -28,4 +28,15 @@ export const instructorRouter = createTRPCRouter({
         },
       }),
     ),
+
+  /** Toggle a student's active status. */
+  toggleStudentActive: instructorProcedure
+    .input(z.object({ studentId: z.string(), isActive: z.boolean() }))
+    .mutation(({ ctx, input }) =>
+      ctx.db.user.update({
+        where: { id: input.studentId },
+        data: { isActive: input.isActive },
+        select: { id: true, isActive: true },
+      }),
+    ),
 });

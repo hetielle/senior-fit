@@ -4,6 +4,7 @@ import { requireInstructor } from "pnpm/server/better-auth/guards";
 import { WorkoutPlanEditor } from "../../../_components/WorkoutPlanEditor";
 import { AppHeader } from "../../../_components/AppHeader";
 import { ActivityHistory } from "../../../_components/ActivityHistory";
+import { StudentActiveToggle } from "../../../_components/StudentActiveToggle";
 import "./page.css";
 
 type Props = { params: Promise<{ studentId: string }> };
@@ -80,6 +81,7 @@ export default async function StudentDetail({ params }: Props) {
         <div className="student-info-card">
           <h1 className="student-detail-name">{student.name}</h1>
           <p className="student-detail-email">{student.email}</p>
+          <StudentActiveToggle studentId={studentId} initialIsActive={student.isActive} />
 
           <div className="student-profile-grid">
             {student.profile?.age && (

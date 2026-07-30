@@ -1,6 +1,7 @@
 import { db } from "pnpm/server/db";
 import { requireInstructor } from "pnpm/server/better-auth/guards";
 import { AppHeader } from "../../_components/AppHeader";
+import { StudentActiveBadge } from "../../_components/StudentActiveBadge";
 import "./page.css";
 
 export default async function InstructorStudents() {
@@ -29,7 +30,7 @@ export default async function InstructorStudents() {
               <a
                 key={student.id}
                 href={`/instructor/students/${student.id}`}
-                className="student-card"
+                className={`student-card ${!student.isActive ? "student-card--inactive" : ""}`}
               >
                 <div className="student-card-info">
                   <span className="student-name">{student.name}</span>
@@ -39,6 +40,7 @@ export default async function InstructorStudents() {
                       {student.profile.objective}
                     </span>
                   )}
+                  <StudentActiveBadge isActive={student.isActive} />
                 </div>
                 <span className="student-card-arrow">→</span>
               </a>
