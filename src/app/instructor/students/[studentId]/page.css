@@ -375,3 +375,78 @@
 .create-exercise-form {
   @apply flex-wrap;
 }
+
+/* Performance metrics */
+
+.metrics-section {
+  @apply mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800;
+}
+
+.metrics-title {
+  @apply mb-4 text-base font-bold text-zinc-700 dark:text-zinc-300;
+}
+
+.metrics-grid {
+  @apply flex flex-wrap gap-3 sm:gap-4;
+}
+
+.metrics-tile {
+  @apply flex min-w-0 flex-1 flex-col items-center rounded-xl border border-zinc-100 bg-zinc-50 px-3 py-6 sm:py-8 dark:border-zinc-800 dark:bg-zinc-950;
+  min-width: 72px;
+}
+
+.metrics-tile--wide {
+  min-width: 140px;
+}
+
+.metrics-value {
+  @apply text-center text-2xl font-extrabold sm:text-3xl;
+}
+
+.metrics-label {
+  @apply mt-1 text-center text-sm font-semibold text-zinc-400 dark:text-zinc-500;
+}
+
+.metrics-sublabel {
+  @apply text-center text-xs text-zinc-400 dark:text-zinc-500;
+}
+
+.metrics-muscle {
+  @apply text-center text-base font-bold sm:text-lg;
+}
+
+.metrics-loading {
+  @apply animate-pulse text-zinc-300 dark:text-zinc-700;
+}
+
+.metrics-value-good {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.metrics-value-warn {
+  @apply text-amber-500 dark:text-amber-400;
+}
+
+.metrics-value-bad {
+  @apply text-red-500;
+}
+
+.metrics-value-neutral {
+  @apply text-zinc-900 dark:text-zinc-50;
+}
+
+.metrics-trend {
+  @apply mt-3 text-sm font-semibold;
+}
+
+.metrics-trend-up {
+  @apply text-red-500;
+}
+
+.metrics-trend-down {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+
+.metrics-trend-stable {
+  @apply text-amber-500 dark:text-amber-400;
+}

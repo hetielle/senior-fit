@@ -5,6 +5,7 @@ import { WorkoutPlanEditor } from "../../../_components/WorkoutPlanEditor";
 import { AppHeader } from "../../../_components/AppHeader";
 import { ActivityHistory } from "../../../_components/ActivityHistory";
 import { StudentActiveToggle } from "../../../_components/StudentActiveToggle";
+import { StudentMetrics } from "../../../_components/StudentMetrics";
 import "./page.css";
 
 type Props = { params: Promise<{ studentId: string }> };
@@ -190,6 +191,8 @@ export default async function StudentDetail({ params }: Props) {
               <p className="profile-empty">Nenhum registro de peso ainda.</p>
             )}
           </div>
+
+          <StudentMetrics studentId={studentId} />
         </div>
 
         {/* Activity history */}
